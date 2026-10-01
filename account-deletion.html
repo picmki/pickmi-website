@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Deletion & Data Privacy Request | Pickmi Cabs</title>
+  <meta name="description" content="Request deletion of your Pickmi Rider or Driver Partner account and personal data. Compliant with Google Play & Apple App Store Data Safety policy requirements.">
+  <meta name="keywords" content="Pickmi account deletion, delete Pickmi account, remove user data, Pickmi privacy, data deletion request">
+  <link rel="canonical" href="https://www.pickmicabs.com/account-deletion.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0043DC;
+      --primary-hover: #0033B3;
+      --success: #10B981;
+      --danger: #EF4444;
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --bg-body: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --border: #E2E8F0;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      background: #FFFFFF;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .header-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #000000;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logo span { color: var(--primary); }
+
+    .nav-back {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-back:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 960px;
+      margin: 40px auto 80px;
+      padding: 0 20px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #EFF6FF;
+      color: var(--primary);
+      border: 1px solid #BFDBFE;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 780px;
+    }
+
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    @media (max-width: 868px) {
+      .grid-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .form-label span.required {
+      color: var(--danger);
+    }
+
+    .form-control, .form-select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--text-main);
+      background-color: #FFFFFF;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-control:focus, .form-select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0, 67, 220, 0.15);
+    }
+
+    .phone-input-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .phone-prefix {
+      width: 100px;
+      flex-shrink: 0;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .checkbox-group input {
+      margin-top: 4px;
+      accent-color: var(--primary);
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .checkbox-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background-color: var(--primary);
+      color: #FFFFFF;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-submit:active {
+      transform: scale(0.99);
+    }
+
+    .steps-list {
+      list-style: none;
+      margin-top: 16px;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #EFF6FF;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .info-section {
+      margin-top: 48px;
+    }
+
+    .info-section h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .info-grid { grid-template-columns: 1fr; }
+    }
+
+    .info-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+    }
+
+    .info-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-card ul {
+      padding-left: 20px;
+    }
+
+    .info-card li {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .alert-box {
+      background: #FEF2F2;
+      border: 1px solid #FCA5A5;
+      border-radius: 8px;
+      padding: 16px 20px;
+      color: #991B1B;
+      font-size: 14px;
+      margin-top: 24px;
+    }
+
+    .alert-box h4 {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    /* Modal / Success Box */
+    .success-card {
+      display: none;
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+      border-radius: var(--radius);
+      padding: 32px;
+      text-align: center;
+    }
+
+    .success-icon {
+      width: 56px;
+      height: 56px;
+      background: #D1FAE5;
+      color: var(--success);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .ref-code {
+      display: inline-block;
+      background: #FFFFFF;
+      border: 1px dashed var(--success);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 16px;
+      font-weight: 700;
+      color: #065F46;
+      margin: 12px 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-muted);
+      background: #FFFFFF;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <img src="images/logo-v2.png" alt="Pickmi Logo" style="height: 32px; width: auto;" onerror="this.style.display='none'">
+        Pick<span>mi</span>
+      </a>
+      <a href="privacy-policy.html" class="nav-back">
+        ← Privacy & Legal Center
+      </a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="hero-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+      Google Play & App Store Data Safety Policy Compliant
+    </div>
+
+    <h1>Account & User Data Deletion Request</h1>
+    <p class="subtitle">
+      Per Google Play and Apple App Store Developer Policy requirements, Pickmi provides users with a direct web option to request the deletion of their Pickmi Rider or Driver Partner account and all associated personal data without requiring app re-installation.
+    </p>
+
+    <div class="grid-layout">
+      
+      <!-- LEFT COLUMN: WEB DELETION REQUEST FORM -->
+      <div class="card">
+        <div class="card-title">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          Submit Web Deletion Request
+        </div>
+        <p class="card-desc">
+          Fill out this form to initiate account and data deletion for your registered Pickmi phone number.
+        </p>
+
+        <!-- SUCCESS MESSAGE CONTAINER -->
+        <div id="successCard" class="success-card">
+          <div class="success-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <h3 style="font-family:'Outfit'; font-size:22px; color:#065F46; margin-bottom:8px;">Request Received</h3>
+          <p style="font-size:14px; color:#047857;">Your account deletion request has been registered in our queue.</p>
+          <div class="ref-code" id="refCodeDisplay">REF: PKM-DEL-89231</div>
+          <p style="font-size:13px; color:#047857; margin-bottom:16px;">
+            A verification OTP / confirmation message will be dispatched to your registered phone number/email within 24 hours. After verification, your profile and data will be permanently wiped within 7 business days.
+          </p>
+          <button type="button" class="btn-submit" style="background:#059669;" onclick="resetForm()">Submit Another Request</button>
+        </div>
+
+        <!-- FORM -->
+        <form id="deletionForm" onsubmit="handleFormSubmit(event)">
+          <div class="form-group">
+            <label class="form-label" for="accountType">Account Type <span class="required">*</span></label>
+            <select class="form-select" id="accountType" required>
+              <option value="Rider">Pickmi Rider Account</option>
+              <option value="Driver">Pickmi Driver Partner Account</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="fullName">Full Name (as registered) <span class="required">*</span></label>
+            <input type="text" class="form-control" id="fullName" placeholder="e.g. Rahul Sharma" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="phoneNumber">Registered Phone Number <span class="required">*</span></label>
+            <div class="phone-input-group">
+              <select class="form-select phone-prefix" id="countryCode">
+                <option value="+91">+91 (IN)</option>
+              </select>
+              <input type="tel" class="form-control" id="phoneNumber" placeholder="10-digit mobile number" pattern="[0-9]{10}" maxlength="10" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="emailAddress">Registered Email Address</label>
+            <input type="email" class="form-control" id="emailAddress" placeholder="name@example.com (optional)">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="deletionReason">Reason for Account Deletion</label>
+            <select class="form-select" id="deletionReason">
+              <option value="No longer using the service">No longer using the service</option>
+              <option value="Privacy concerns">Privacy & Data concerns</option>
+              <option value="Created duplicate account">Created a duplicate account</option>
+              <option value="Switching to another service">Switching to another app</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox-group">
+              <input type="checkbox" id="confirmConsent" required>
+              <label class="checkbox-label" for="confirmConsent">
+                I confirm that I am the account holder and request permanent deletion of my profile, personal data, and saved app preferences. <span class="required">*</span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+            Request Account Deletion
+          </button>
+        </form>
+      </div>
+
+      <!-- RIGHT COLUMN: IN-APP DELETION INSTRUCTIONS -->
+      <div class="card">
+        <div class="card-title">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+            <line x1="12" y1="18" x2="12.01" y2="18"/>
+          </svg>
+          In-App Account Deletion Steps
+        </div>
+        <p class="card-desc">
+          If you currently have the Pickmi app installed on your smartphone, you can also delete your account directly inside the app:
+        </p>
+
+        <h4 style="font-size:15px; font-weight:700; margin-bottom:12px; color:var(--primary);">📱 For Pickmi Rider App:</h4>
+        <ul class="steps-list">
+          <li class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Open Profile Menu</h4>
+              <p>Launch the Pickmi App and tap your Profile Icon in the upper top bar.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Navigate to Account Settings</h4>
+              <p>Select <strong>Settings</strong> &gt; <strong>Privacy &amp; Security</strong>.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Select Delete Account</h4>
+              <p>Tap <strong>"Delete My Account"</strong> at the bottom of the security page.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h4>OTP Authentication</h4>
+              <p>Enter the 6-digit SMS OTP sent to your registered phone to confirm deletion.</p>
+            </div>
+          </li>
+        </ul>
+
+        <h4 style="font-size:15px; font-weight:700; margin-top:24px; margin-bottom:12px; color:var(--primary);">🚕 For Pickmi Driver Partner App:</h4>
+        <ul class="steps-list">
+          <li class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Set Status to Offline</h4>
+              <p>Ensure you are not in an active trip and switch your status to <strong>OFFLINE</strong>.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Go to Account & Documents</h4>
+              <p>Open <strong>Menu &gt; Profile &gt; Account Deletion</strong>.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Clear Wallet & Submit</h4>
+              <p>Ensure all pending payouts are transferred to your bank account before tapping <strong>Request Partner Deletion</strong>.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- DATA SCOPE & POLICY DETAILS -->
+    <div class="info-section">
+      <h2>Data Deletion & Retention Policy Overview</h2>
+      
+      <div class="info-grid">
+        <div class="info-card">
+          <h3 style="color:#059669;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Data That Will Be Permanently Wiped
+          </h3>
+          <ul>
+            <li><strong>User Profile:</strong> Name, phone number, email address, profile picture, gender, and language preferences.</li>
+            <li><strong>Saved Locations & Favorites:</strong> Home, work, and saved trip destinations.</li>
+            <li><strong>Authentication & Tokens:</strong> Login tokens, active sessions, push notification tokens, and device identifiers.</li>
+            <li><strong>Driver Documents (for Drivers):</strong> Scanned copies of Driving License, Vehicle RC, Vehicle Insurance, and National ID.</li>
+            <li><strong>Ratings & Preferences:</strong> Customer feedback ratings and driver vehicle preferences.</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h3 style="color:#D97706;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            Data Retained for Legal Compliance
+          </h3>
+          <ul>
+            <li><strong>Financial & Tax Records:</strong> Invoices, trip billing history, driver payouts, and GST tax records are retained for statutory accounting periods mandated by Indian tax regulations (up to 7 years).</li>
+            <li><strong>Safety & Legal Dispute Logs:</strong> If an account is subject to an active safety investigation, fraud report, or legal dispute, relevant logs are temporarily retained until resolution.</li>
+            <li><strong>Anonymized Aggregated Data:</strong> De-identified route metrics used for platform performance optimization (stripped of personal identifiers).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="alert-box">
+        <h4>⚡ Account Deletion Processing Timeline</h4>
+        <p>
+          Once your deletion request is verified, your account will be immediately deactivated and logged out. The complete deletion of data from our active database servers takes <strong>up to 7 to 14 business days</strong>. If you change your mind within 7 days, you can contact support at <a href="mailto:support@pickmicabs.com" style="color:#991B1B; font-weight:700;">support@pickmicabs.com</a> to cancel the deletion request.
+        </p>
+      </div>
+
+      <div style="margin-top: 32px; background: #FFFFFF; border: 1px solid var(--border); border-radius: 10px; padding: 24px;">
+        <h3 style="font-family:'Outfit'; font-size:18px; margin-bottom:8px;">Contact Support for Data & Privacy Assistance</h3>
+        <p style="font-size:14px; color:var(--text-muted); margin-bottom:12px;">
+          Have questions about your personal data or need help deleting your account? Our dedicated Privacy Operations team is available 24/7.
+        </p>
+        <p style="font-size:14px; color:var(--text-main);">
+          📧 Email: <a href="mailto:privacy@pickmicabs.com" style="color:var(--primary); font-weight:600;">privacy@pickmicabs.com</a> / <a href="mailto:support@pickmicabs.com" style="color:var(--primary); font-weight:600;">support@pickmicabs.com</a><br>
+          🌐 Website: <a href="https://www.pickmicabs.com" style="color:var(--primary); font-weight:600;">https://www.pickmicabs.com</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div style="max-width:960px; margin:0 auto; padding:0 20px;">
+      <p>© 2026 Pickmi Technologies. All rights reserved.</p>
+      <p style="margin-top:6px; font-size:13px;">
+        <a href="index.html">Home</a> &nbsp;|&nbsp;
+        <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp;
+        <a href="account-deletion.html">Account Deletion</a> &nbsp;|&nbsp;
+        <a href="help.html">Help Center</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function handleFormSubmit(event) {
+      event.preventDefault();
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const phone = document.getElementById('phoneNumber').value.trim();
+      const accountType = document.getElementById('accountType').value;
+
+      if (!fullName || !phone || phone.length < 10) {
+        alert("Please enter a valid full name and 10-digit phone number.");
+        return;
+      }
+
+      // Generate reference code
+      const randomId = Math.floor(100000 + Math.random() * 900000);
+      const refCode = `PKM-DEL-${randomId}`;
+
+      document.getElementById('refCodeDisplay').innerText = `REFERENCE NO: ${refCode}`;
+
+      // Save request to localStorage so it persists locally if needed
+      try {
+        const existingRequests = JSON.parse(localStorage.getItem('pickmi_deletion_requests') || '[]');
+        existingRequests.push({
+          refCode: refCode,
+          accountType: accountType,
+          name: fullName,
+          phone: phone,
+          email: document.getElementById('emailAddress').value,
+          reason: document.getElementById('deletionReason').value,
+          date: new Date().toISOString()
+        });
+        localStorage.setItem('pickmi_deletion_requests', JSON.stringify(existingRequests));
+      } catch (e) {
+        console.log('LocalStorage error', e);
+      }
+
+      // Toggle UI
+      document.getElementById('deletionForm').style.display = 'none';
+      document.getElementById('successCard').style.display = 'block';
+      window.scrollTo({ top: document.getElementById('successCard').offsetTop - 100, behavior: 'smooth' });
+    }
+
+    function resetForm() {
+      document.getElementById('deletionForm').reset();
+      document.getElementById('deletionForm').style.display = 'block';
+      document.getElementById('successCard').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

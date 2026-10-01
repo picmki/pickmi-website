@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile & Account | Pickmi Cabs</title>
+  <meta name="description" content="Manage your Pickmi account profile, co-travellers, login devices, and account settings.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="styles.css?v=200">
+
+  <style>
+    @keyframes headerFadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .header {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      z-index: 10000 !important;
+      background: #ffffff !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    /* Account Page Layout - Single Unified Card */
+    .account-page-section {
+      padding: 110px 0 80px;
+      background-color: #f8fafc;
+      min-height: calc(100vh - 120px);
+    }
+    .account-grid {
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
+      border: none;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      overflow: hidden;
+      height: 620px;
+    }
+
+    /* Left Sidebar inside Single Card */
+    .account-sidebar {
+      background: #ffffff;
+      border: none;
+      border-radius: 0;
+      padding: 32px 20px 32px 24px;
+      box-shadow: none;
+      border-right: 1px solid #f1f5f9;
+      position: static;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar-header {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      padding-left: 12px;
+    }
+    .sidebar-menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      user-select: none;
+    }
+    .sidebar-item:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+    .sidebar-item.active {
+      background: #e0f2fe;
+      color: #0284c7;
+      font-weight: 600;
+    }
+    .sidebar-item-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+    .sidebar-item-icon svg {
+      stroke-width: 2;
+    }
+    .sidebar-label-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-grow: 1;
+    }
+    .red-dot-indicator {
+      width: 7px;
+      height: 7px;
+      background-color: #ef4444;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .sidebar-divider {
+      height: 1px;
+      background: #f1f5f9;
+      margin: 12px 0;
+    }
+
+    /* Main Right Content Area inside Single Card */
+    .account-content {
+      background: #ffffff;
+      border: none;
+      border-radius: 0;
+      padding: 36px 40px;
+      box-shadow: none;
+      height: 100%;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+    .account-content::-webkit-scrollbar {
+      width: 6px;
+    }
+    .account-content::-webkit-scrollbar-track {
+      background: #f8fafc;
+    }
+    .account-content::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .account-content::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.active {
+      display: block;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Personal Info Section Styling */
+    .personal-info-title {
+      font-size: 32px;
+      font-weight: 600;
+      color: #000000;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .profile-avatar-box {
+      width: 104px;
+      height: 104px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 28px;
+      background: #f1f5f9;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    }
+    .profile-avatar-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .info-rows-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .info-row-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 4px;
+      border-bottom: 1px solid #f1f5f9;
+      cursor: pointer;
+      transition: background 0.15s ease, padding 0.15s ease;
+      text-decoration: none;
+    }
+    .info-row-item:hover {
+      background: #f8fafc;
+      padding-left: 12px;
+      padding-right: 12px;
+      border-radius: 12px;
+    }
+    .info-row-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .info-row-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #000000;
+    }
+    .info-row-subtext {
+      font-size: 15px;
+      font-weight: 400;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .green-verified-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      background-color: #16a34a;
+      color: #ffffff;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .info-row-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Activity / Trip History Styling */
+    .activity-top-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    /* Language Selection Popup Styles */
+    .lang-option-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #ffffff;
+    }
+    .lang-option-item:hover {
+      border-color: #cbd5e1;
+      background: #f8fafc;
+    }
+    .lang-option-item.active {
+      border-color: #0043DC;
+      background: #eff6ff;
+    }
+    .lang-option-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .lang-flag {
+      font-size: 22px;
+    }
+    .lang-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .lang-native {
+      font-size: 13px;
+      color: #64748b;
+    }
+    .lang-check {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0043DC;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .lang-option-item.active .lang-check {
+      opacity: 1;
+    }
+    .activity-filter-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .activity-filter-btn {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 9999px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      cursor: pointer;
+      outline: none;
+      font-family: inherit;
+    }
+    .activity-date-range {
+      font-size: 20px;
+      font-weight: 800;
+      color: #000000;
+      margin-bottom: 24px;
+    }
+    .activity-trips-grid {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 16px !important;
+    }
+    .activity-trip-card {
+      border: 1px solid #e5e7eb !important;
+      border-radius: 16px !important;
+      padding: 14px 20px !important;
+      background: #ffffff !important;
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 16px !important;
+      box-shadow: none !important;
+      transition: all 0.2s ease !important;
+      text-align: left !important;
+    }
+    .activity-trip-card:hover {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04) !important;
+      border-color: #cbd5e1 !important;
+    }
+    .activity-vehicle-icon {
+      width: 72px !important;
+      height: 52px !important;
+      flex-shrink: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: transparent !important;
+    }
+    .activity-vehicle-icon img, .activity-vehicle-icon svg {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: contain !important;
+    }
+    .activity-trip-details {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 2px !important;
+      flex-grow: 1 !important;
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      text-align: left !important;
+    }
+    .activity-trip-location {
+      font-size: 18px !important;
+      font-weight: 600 !important;
+      color: #000000 !important;
+      letter-spacing: -0.02em !important;
+      line-height: 1.2 !important;
+      margin: 0 !important;
+    }
+    .activity-trip-meta {
+      font-size: 13px !important;
+      color: #475569 !important;
+      font-weight: 500 !important;
+      margin: 0 !important;
+    }
+    .activity-trip-status {
+      font-size: 13.5px !important;
+      font-weight: 700 !important;
+      color: #000000 !important;
+      margin-bottom: 4px !important;
+    }
+    .activity-help-btn {
+      background: #f3f4f6 !important;
+      border: none !important;
+      border-radius: 9999px !important;
+      padding: 4px 12px !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      color: #0f172a !important;
+      cursor: pointer !important;
+      font-family: inherit !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      transition: background 0.15s ease !important;
+    }
+    .activity-help-btn:hover {
+      background: #e5e7eb !important;
+    }
+    .help-btn-circle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      background: #0f172a;
+      color: #ffffff;
+      border-radius: 50%;
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    /* Logout Alert Modal */
+    .logout-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .logout-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .logout-modal-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 36px 32px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      transform: scale(0.9);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .logout-modal-overlay.active .logout-modal-card {
+      transform: scale(1);
+    }
+    .logout-icon-wrap {
+      width: 60px;
+      height: 60px;
+      background: #fee2e2;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .logout-modal-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+    .logout-modal-desc {
+      font-size: 14px;
+      color: #64748b;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+    .logout-modal-actions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .logout-btn-cancel {
+      padding: 13px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      color: #475569;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s;
+    }
+    .logout-btn-cancel:hover {
+      background: #f8fafc;
+    }
+    .logout-btn-confirm {
+      padding: 13px;
+      border-radius: 12px;
+      border: none;
+      background: #e11d48;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s;
+      box-shadow: 0 4px 14px rgba(225, 29, 72, 0.3);
+    }
+    .logout-btn-confirm:hover {
+      background: #be123c;
+    }
+
+    /* Content Header */
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .panel-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+    }
+    .btn-save {
+      background-color: #cbd5e1;
+      color: #475569;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-save.active-save {
+      background-color: #2563eb;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+    .btn-save.active-save:hover {
+      background-color: #1d4ed8;
+      transform: translateY(-1px);
+    }
+
+    /* Birthday Banner */
+    .birthday-banner {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 1.5px solid #fcd34d;
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .birthday-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .gift-box-icon {
+      width: 44px;
+      height: 44px;
+      background: #fef3c7;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.2);
+    }
+    .birthday-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #78350f;
+      margin-bottom: 2px;
+    }
+    .birthday-desc {
+      font-size: 13px;
+      color: #92400e;
+    }
+    .add-dob-btn {
+      color: #2563eb;
+      font-size: 14px;
+      font-weight: 600;
+      background: none;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .add-dob-btn:hover {
+      color: #1d4ed8;
+      text-decoration: underline;
+    }
+
+    /* Form Layout */
+    .form-section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 20px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    
+    /* Input Field Styling */
+    .field-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .field-box {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 10px 16px;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .field-box:focus-within {
+      background: #ffffff;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+    .field-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+      display: block;
+    }
+    .field-input, .field-select {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-size: 15px;
+      font-weight: 600;
+      color: #0f172a;
+      outline: none;
+      font-family: inherit;
+      padding: 2px 0;
+    }
+    .field-select {
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L7 7L13 1' stroke='%3C0d9488' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 4px center;
+      padding-right: 24px;
+    }
+    .field-helper {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 6px;
+      padding-left: 4px;
+    }
+
+    .badge-verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #dcfce7;
+      color: #166534;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .section-divider {
+      height: 1px;
+      background: #e2e8f0;
+      margin: 36px 0 28px;
+    }
+
+    /* Co-Travellers Cards */
+    .traveller-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      background: #ffffff;
+      transition: box-shadow 0.2s;
+    }
+    .traveller-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .traveller-info h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .traveller-info p {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    /* Toast Notification */
+    .account-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 99999;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+    .account-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .account-grid {
+        grid-template-columns: 1fr;
+      }
+      .account-sidebar {
+        position: static;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+</head>
+<body>
+
+  <!-- LIGHT HEADER FOR NAV -->
+  <header class="header header-light" id="header">
+    <script>
+      (function() {
+        var handleScroll = function() {
+          var hdr = document.getElementById("header");
+          var b2t = document.getElementById("backToTop");
+          var pos = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+          if (pos > 50) {
+            if (hdr) hdr.classList.add("sticky");
+            if (b2t) b2t.classList.add("active");
+          } else {
+            if (hdr) hdr.classList.remove("sticky");
+            if (b2t) b2t.classList.remove("active");
+          }
+        };
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        document.addEventListener("scroll", handleScroll, { passive: true });
+        document.addEventListener("DOMContentLoaded", handleScroll);
+        handleScroll();
+      })();
+    </script>
+
+    <div class="container">
+      <a href="index.html" class="logo" id="logoLink">
+        <img src="images/logo-v2.png" alt="pick MI Logo" class="logo-img">
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <div class="country-selector" id="countrySelector">
+          <img src="https://flagcdn.com/w20/in.png" alt="India Flag" class="flag-icon">
+          <span class="country-code">IN</span>
+        </div>
+        
+        <span class="nav-separator"></span>
+        
+        <a href="driver.html" class="nav-link">Drive Partner</a>
+        <a href="community.html" class="nav-link">Community</a>
+        <a href="help.html" class="nav-link">Help</a>
+        
+        <span class="nav-separator"></span>
+        
+        <a href="account.html" class="account-nav-link active" id="accountBtn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="account-avatar-svg">
+            <circle cx="12" cy="12" r="12" fill="#0043DC" />
+            <circle cx="12" cy="9" r="4.5" fill="#ffffff" />
+            <path d="M12 15c-4 0-7.5 2-7.5 4.8v1.2h15v-1.2c0-2.8-3.5-4.8-7.5-4.8z" fill="#ffffff" />
+          </svg>
+          <span id="navAccountName">Hi, Karthik</span>
+        </a>
+      </nav>
+
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="account-page-section">
+    <div class="container">
+      <div class="account-grid">
+
+        <!-- LEFT SIDEBAR -->
+        <aside class="account-sidebar">
+          <div class="sidebar-header">MY ACCOUNT</div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="#profile" class="sidebar-item active" data-tab="tab-profile">
+                <span class="sidebar-item-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  </svg>
+                </span>
+                <span class="sidebar-label-wrap">
+                  My Profile <span class="red-dot-indicator"></span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#activity" class="sidebar-item" data-tab="tab-activity">
+                <span class="sidebar-item-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                  </svg>
+                </span>
+                <span class="sidebar-label-wrap">Activity</span>
+              </a>
+            </li>
+            <li>
+              <a href="#safety" class="sidebar-item" data-tab="tab-safety">
+                <span class="sidebar-item-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                </span>
+                <span class="sidebar-label-wrap">Safety</span>
+              </a>
+            </li>
+            <div class="sidebar-divider"></div>
+            <li>
+              <a href="#" class="sidebar-item logout-sidebar-cta" id="sidebarLogout">
+                <span class="sidebar-item-icon" style="color:#e11d48;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                    <polyline points="16 17 21 12 16 7"/>
+                    <line x1="21" y1="12" x2="9" y2="12"/>
+                  </svg>
+                </span>
+                <span class="sidebar-label-wrap" style="color:#e11d48; font-weight:700;">Logout</span>
+              </a>
+            </li>
+          </ul>
+        </aside>
+
+        <!-- RIGHT CONTENT AREA -->
+        <div class="account-content">
+
+          <!-- TAB 1: MY PROFILE (PERSONAL INFO) -->
+          <div class="tab-panel active" id="tab-profile">
+            <h1 class="personal-info-title">Personal info</h1>
+
+            <div class="profile-avatar-box" id="avatarBox">
+              <img src="images/avatar-uploaded.png" onerror="this.src='https://ui-avatars.com/api/?name=Karthik+P&background=0052ff&color=fff'" alt="Profile Photo">
+            </div>
+
+            <div class="info-rows-list">
+              
+              <!-- Name Row -->
+              <div class="info-row-item" id="rowEditName">
+                <div class="info-row-left">
+                  <div class="info-row-title">Name</div>
+                  <div class="info-row-subtext" id="displayProfileName">Karthik P</div>
+                </div>
+                <div class="info-row-right">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+
+              <!-- Phone number Row -->
+              <div class="info-row-item" id="rowEditPhone">
+                <div class="info-row-left">
+                  <div class="info-row-title">Phone number</div>
+                  <div class="info-row-subtext" id="displayProfilePhone">
+                    <span>+919345233351</span>
+                    <span class="green-verified-badge">✓</span>
+                  </div>
+                </div>
+                <div class="info-row-right">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+
+              <!-- Email Row -->
+              <div class="info-row-item" id="rowEditEmail">
+                <div class="info-row-left">
+                  <div class="info-row-title">Email</div>
+                  <div class="info-row-subtext" id="displayProfileEmail">
+                    <span>karthikpalani7613@gmail.com</span>
+                    <span class="green-verified-badge">✓</span>
+                  </div>
+                </div>
+                <div class="info-row-right">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+
+
+          <!-- TAB 2: ACTIVITY / TRIP HISTORY -->
+          <div class="tab-panel" id="tab-activity">
+            
+            <div class="activity-top-header" style="margin-bottom: 28px;">
+              <h1 class="activity-main-title">Activity</h1>
+            </div>
+
+            <div class="activity-trips-grid">
+
+              <!-- Trip 1: Chennai -->
+              <div class="activity-trip-card" style="cursor: pointer;"
+                   data-location="Chennai"
+                   data-meta="4:32 PM, Wednesday Jul 8 2026 with RAMESH"
+                   data-price="₹0.00 • Canceled"
+                   data-distance="14.50 kilometres"
+                   data-duration="38 minutes"
+                   data-payment="Cash"
+                   data-pickup="Anna Salai, Thousand Lights, Chennai, Tamil Nadu 600006, India"
+                   data-pickup-time="4:32 PM"
+                   data-drop="T. Nagar, MGR Salai, Chennai, Tamil Nadu 600017, India"
+                   data-drop-time="5:10 PM">
+                <div class="activity-vehicle-icon">
+                  <svg width="84" height="60" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="50" cy="58" rx="38" ry="5" fill="#e2e8f0"/>
+                    <path d="M12 42 C12 36 18 32 25 32 L38 22 C44 17 58 17 68 22 L82 32 C88 33 92 37 92 42 L92 48 C92 51 89 53 86 53 L18 53 C15 53 12 51 12 48 Z" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+                    <path d="M40 23 L66 23 L76 31 L28 31 Z" fill="#94a3b8"/>
+                    <circle cx="16" cy="42" r="3" fill="#f59e0b"/>
+                    <circle cx="30" cy="52" r="8" fill="#0f172a"/>
+                    <circle cx="30" cy="52" r="4" fill="#f1f5f9"/>
+                    <circle cx="72" cy="52" r="8" fill="#0f172a"/>
+                    <circle cx="72" cy="52" r="4" fill="#f1f5f9"/>
+                  </svg>
+                </div>
+                <div class="activity-trip-details">
+                  <div class="activity-trip-location">Chennai</div>
+                  <div class="activity-trip-meta">Jul 8 • 4:32 PM</div>
+                  <div class="activity-trip-status">₹0.00 • Canceled</div>
+                </div>
+              </div>
+
+              <!-- Trip 2: Bangalore (Satellite Bus Stand) -->
+              <div class="activity-trip-card" style="cursor: pointer;"
+                   data-location="Bangalore(Satellite Bus Stand)"
+                   data-meta="2:07 PM, Monday Jun 29 2026 with ANAND"
+                   data-price="₹178.92"
+                   data-distance="18.20 kilometres"
+                   data-duration="42 minutes"
+                   data-payment="Pickmi Pay / UPI"
+                   data-pickup="Satellite Bus Stand, Mysore Rd, Bengaluru, Karnataka 560026, India"
+                   data-pickup-time="2:07 PM"
+                   data-drop="Koramangala 5th Block, Bengaluru, Karnataka 560095, India"
+                   data-drop-time="2:49 PM">
+                <div class="activity-vehicle-icon">
+                  <svg width="84" height="60" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="50" cy="58" rx="34" ry="5" fill="#e2e8f0"/>
+                    <path d="M22 22 C22 16 32 14 52 14 C72 14 82 16 82 22 L80 32 L24 32 Z" fill="#f59e0b"/>
+                    <path d="M20 32 L82 32 C85 32 88 36 88 42 L84 52 C82 55 78 55 74 55 L26 55 C22 55 18 52 18 46 Z" fill="#10b981"/>
+                    <circle cx="28" cy="54" r="8" fill="#1e293b"/>
+                    <circle cx="28" cy="54" r="4" fill="#f8fafc"/>
+                    <circle cx="74" cy="54" r="8" fill="#1e293b"/>
+                    <circle cx="74" cy="54" r="4" fill="#f8fafc"/>
+                    <path d="M26 23 L42 23 L40 31 L26 31 Z" fill="#64748b"/>
+                  </svg>
+                </div>
+                <div class="activity-trip-details">
+                  <div class="activity-trip-location">Bangalore(Satellite Bus Stand)</div>
+                  <div class="activity-trip-meta">Jun 29 • 2:07 PM</div>
+                  <div class="activity-trip-status">₹178.92</div>
+                </div>
+              </div>
+
+              <!-- Trip 3: Zaffarkhanpet -->
+              <div class="activity-trip-card" style="cursor: pointer;"
+                   data-location="Zaffarkhanpet"
+                   data-meta="1:52 PM, Sunday Jun 28 2026 with VIJAY"
+                   data-price="₹0.00 • Canceled"
+                   data-distance="8.20 kilometres"
+                   data-duration="22 minutes"
+                   data-payment="Cash"
+                   data-pickup="Mount Road, Guindy, Chennai, Tamil Nadu 600032, India"
+                   data-pickup-time="1:52 PM"
+                   data-drop="Zaffarkhanpet Main Rd, Jafferkhanpet, Chennai, Tamil Nadu 600083, India"
+                   data-drop-time="2:14 PM">
+                <div class="activity-vehicle-icon">
+                  <svg width="84" height="60" viewBox="0 0 110 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="62" cy="58" rx="36" ry="5" fill="#e2e8f0"/>
+                    <circle cx="16" cy="24" r="4" fill="#0f172a"/>
+                    <path d="M16 28 L16 46 M16 34 L10 40 M16 34 L22 40 M16 46 L12 56 M16 46 L20 56" stroke="#2563eb" stroke-width="3.5" stroke-linecap="round"/>
+                    <rect x="2" y="42" width="9" height="14" rx="2" fill="#334155"/>
+                    <path d="M4 42 V39 C4 38 7 38 7 39 V42" stroke="#334155" stroke-width="1.5"/>
+                    <path d="M36 40 C36 35 42 31 49 31 L60 22 C65 17 78 17 87 22 L98 31 C102 33 106 36 106 40 L106 47 C106 50 103 52 100 52 L42 52 C39 52 36 50 36 47 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+                    <path d="M62 23 L85 23 L93 30 L52 30 Z" fill="#94a3b8"/>
+                    <circle cx="52" cy="52" r="8" fill="#0f172a"/>
+                    <circle cx="52" cy="52" r="4" fill="#f1f5f9"/>
+                    <circle cx="90" cy="52" r="8" fill="#0f172a"/>
+                    <circle cx="90" cy="52" r="4" fill="#f1f5f9"/>
+                  </svg>
+                </div>
+                <div class="activity-trip-details">
+                  <div class="activity-trip-location">Zaffarkhanpet</div>
+                  <div class="activity-trip-meta">Jun 28 • 1:52 PM</div>
+                  <div class="activity-trip-status">₹0.00 • Canceled</div>
+                </div>
+              </div>
+
+              <!-- Trip 4: Fort Kochi -->
+              <div class="activity-trip-card" style="cursor: pointer;"
+                   data-location="Fort Kochi"
+                   data-meta="11:12 PM, Friday Jun 26 2026 with RAJESH"
+                   data-price="₹0.00 • Canceled"
+                   data-distance="18.40 kilometres"
+                   data-duration="45 minutes"
+                   data-payment="Cash"
+                   data-pickup="MG Road, Ernakulam North, Kochi, Kerala 682018, India"
+                   data-pickup-time="11:12 PM"
+                   data-drop="Tower Road, Fort Kochi, Kochi, Kerala 682001, India"
+                   data-drop-time="11:57 PM">
+                <div class="activity-vehicle-icon">
+                  <svg width="84" height="60" viewBox="0 0 110 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="62" cy="58" rx="36" ry="5" fill="#e2e8f0"/>
+                    <circle cx="16" cy="24" r="4" fill="#0f172a"/>
+                    <path d="M16 28 L16 46 M16 34 L10 40 M16 34 L22 40 M16 46 L12 56 M16 46 L20 56" stroke="#2563eb" stroke-width="3.5" stroke-linecap="round"/>
+                    <rect x="2" y="42" width="9" height="14" rx="2" fill="#334155"/>
+                    <path d="M4 42 V39 C4 38 7 38 7 39 V42" stroke="#334155" stroke-width="1.5"/>
+                    <path d="M36 40 C36 35 42 31 49 31 L60 22 C65 17 78 17 87 22 L98 31 C102 33 106 36 106 40 L106 47 C106 50 103 52 100 52 L42 52 C39 52 36 50 36 47 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+                    <path d="M62 23 L85 23 L93 30 L52 30 Z" fill="#94a3b8"/>
+                    <circle cx="52" cy="52" r="8" fill="#0f172a"/>
+                    <circle cx="52" cy="52" r="4" fill="#f1f5f9"/>
+                    <circle cx="90" cy="52" r="8" fill="#0f172a"/>
+                    <circle cx="90" cy="52" r="4" fill="#f1f5f9"/>
+                  </svg>
+                </div>
+                <div class="activity-trip-details">
+                  <div class="activity-trip-location">Fort Kochi</div>
+                  <div class="activity-trip-meta">Jun 26 • 11:12 PM</div>
+                  <div class="activity-trip-status">₹0.00 • Canceled</div>
+                </div>
+              </div>
+
+              <!-- Trip 5: Chennai -->
+              <div class="activity-trip-card" style="cursor: pointer;"
+                   data-location="Chennai"
+                   data-meta="7:45 AM, Tuesday Jun 16 2026 with SURESH"
+                   data-price="₹342.10"
+                   data-distance="24.80 kilometres"
+                   data-duration="52 minutes"
+                   data-payment="Credit Card"
+                   data-pickup="Chennai International Airport, Meenambakkam, Chennai 600027, India"
+                   data-pickup-time="7:45 AM"
+                   data-drop="Alwarpet Main Rd, Chennai, Tamil Nadu 600018, India"
+                   data-drop-time="8:37 AM">
+                <div class="activity-vehicle-icon">
+                  <svg width="84" height="60" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="50" cy="58" rx="38" ry="5" fill="#e2e8f0"/>
+                    <path d="M12 42 C12 36 18 32 25 32 L38 22 C44 17 58 17 68 22 L82 32 C88 33 92 37 92 42 L92 48 C92 51 89 53 86 53 L18 53 C15 53 12 51 12 48 Z" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+                    <path d="M40 23 L66 23 L76 31 L28 31 Z" fill="#94a3b8"/>
+                    <circle cx="16" cy="42" r="3" fill="#f59e0b"/>
+                    <circle cx="30" cy="52" r="8" fill="#0f172a"/>
+                    <circle cx="30" cy="52" r="4" fill="#f1f5f9"/>
+                    <circle cx="72" cy="52" r="8" fill="#0f172a"/>
+                    <circle cx="72" cy="52" r="4" fill="#f1f5f9"/>
+                  </svg>
+                </div>
+                <div class="activity-trip-details">
+                  <div class="activity-trip-location">Chennai</div>
+                  <div class="activity-trip-meta">Jun 16 • 7:45 AM</div>
+                  <div class="activity-trip-status">₹342.10</div>
+                </div>
+              </div>
+
+              <!-- Trip 6: Indiranagar 100ft Rd -->
+              <div class="activity-trip-card" style="cursor: pointer;"
+                   data-location="Indiranagar 100ft Rd"
+                   data-meta="6:18 PM, Thursday Jun 4 2026 with KUMAR"
+                   data-price="₹145.50"
+                   data-distance="12.10 kilometres"
+                   data-duration="35 minutes"
+                   data-payment="Cash"
+                   data-pickup="MG Road Metro Station, Bengaluru, Karnataka 560001, India"
+                   data-pickup-time="6:18 PM"
+                   data-drop="100 Feet Rd, HAL 2nd Stage, Indiranagar, Bengaluru 560038, India"
+                   data-drop-time="6:53 PM">
+                <div class="activity-vehicle-icon">
+                  <svg width="84" height="60" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="50" cy="58" rx="38" ry="5" fill="#e2e8f0"/>
+                    <path d="M12 42 C12 36 18 32 25 32 L38 22 C44 17 58 17 68 22 L82 32 C88 33 92 37 92 42 L92 48 C92 51 89 53 86 53 L18 53 C15 53 12 51 12 48 Z" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+                    <path d="M40 23 L66 23 L76 31 L28 31 Z" fill="#94a3b8"/>
+                    <circle cx="16" cy="42" r="3" fill="#f59e0b"/>
+                    <circle cx="30" cy="52" r="8" fill="#0f172a"/>
+                    <circle cx="30" cy="52" r="4" fill="#f1f5f9"/>
+                    <circle cx="72" cy="52" r="8" fill="#0f172a"/>
+                    <circle cx="72" cy="52" r="4" fill="#f1f5f9"/>
+                  </svg>
+                </div>
+                <div class="activity-trip-details">
+                  <div class="activity-trip-location">Indiranagar 100ft Rd</div>
+                  <div class="activity-trip-meta">Jun 4 • 6:18 PM</div>
+                  <div class="activity-trip-status">₹145.50</div>
+                </div>
+              </div>
+
+              <!-- Trip 7: Electronic City Phase 1 -->
+              <div class="activity-trip-card" style="cursor: pointer;"
+                   data-location="Electronic City Phase 1"
+                   data-meta="5:30 PM, Monday Jun 1 2026 with DINESH"
+                   data-price="₹289.00"
+                   data-distance="22.40 kilometres"
+                   data-duration="48 minutes"
+                   data-payment="UPI / PhonePe"
+                   data-pickup="Silk Board Junction, Hosur Rd, Bengaluru, Karnataka 560068, India"
+                   data-pickup-time="5:30 PM"
+                   data-drop="Velankani Drive, Electronic City Phase 1, Bengaluru 560100, India"
+                   data-drop-time="6:18 PM">
+                <div class="activity-vehicle-icon">
+                  <svg width="84" height="60" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="50" cy="58" rx="38" ry="5" fill="#e2e8f0"/>
+                    <path d="M12 42 C12 36 18 32 25 32 L38 22 C44 17 58 17 68 22 L82 32 C88 33 92 37 92 42 L92 48 C92 51 89 53 86 53 L18 53 C15 53 12 51 12 48 Z" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+                    <path d="M40 23 L66 23 L76 31 L28 31 Z" fill="#94a3b8"/>
+                    <circle cx="16" cy="42" r="3" fill="#f59e0b"/>
+                    <circle cx="30" cy="52" r="8" fill="#0f172a"/>
+                    <circle cx="30" cy="52" r="4" fill="#f1f5f9"/>
+                    <circle cx="72" cy="52" r="8" fill="#0f172a"/>
+                    <circle cx="72" cy="52" r="4" fill="#f1f5f9"/>
+                  </svg>
+                </div>
+                <div class="activity-trip-details">
+                  <div class="activity-trip-location">Electronic City Phase 1</div>
+                  <div class="activity-trip-meta">Jun 1 • 5:30 PM</div>
+                  <div class="activity-trip-status">₹289.00</div>
+                </div>
+              </div>
+
+              <!-- Trip 8: PAYAL FANCY GIFT & STATIONERY -->
+              <div class="activity-trip-card" style="cursor: pointer;"
+                   data-location="PAYAL FANCY GIFT & STATIONERY"
+                   data-meta="9:02 AM, Thursday May 28 2026 with SACHIN"
+                   data-price="₹224.65"
+                   data-distance="28.25 kilometres"
+                   data-duration="1 hours 2 minutes"
+                   data-payment="Cash"
+                   data-pickup="7th Main Rd, Shakambari Nagar, 1st Phase, J. P. Nagar, Bengaluru, Karnataka 560078, India"
+                   data-pickup-time="9:02 AM"
+                   data-drop="560073, 3rd Cross BMV Mayanna Layout Main, Mayanna Layout, Shrikantapura, Anchepalya, Madanayakanahalli, Karnataka 560073, India"
+                   data-drop-time="10:04 AM">
+                <div class="activity-vehicle-icon">
+                  <svg width="84" height="60" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="50" cy="58" rx="34" ry="5" fill="#e2e8f0"/>
+                    <!-- Bike frame -->
+                    <circle cx="28" cy="48" r="11" stroke="#0f172a" stroke-width="3" fill="none"/>
+                    <circle cx="72" cy="48" r="11" stroke="#0f172a" stroke-width="3" fill="none"/>
+                    <path d="M28 48 L46 48 L58 32 L36 32 Z M58 32 L72 48 M46 48 L46 26 L54 26" stroke="#e11d48" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="62" y="24" width="16" height="14" rx="2" fill="#0f172a"/>
+                  </svg>
+                </div>
+                <div class="activity-trip-details">
+                  <div class="activity-trip-location">PAYAL FANCY GIFT & STATIONERY</div>
+                  <div class="activity-trip-meta">May 28 • 8:52 AM</div>
+                  <div class="activity-trip-status">₹224.65</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- TAB 3: SAFETY & SECURITY -->
+          <div class="tab-panel" id="tab-safety">
+            <div class="panel-header" style="margin-bottom: 8px;">
+              <h1 class="panel-title" style="font-weight: 600;">Safety</h1>
+            </div>
+            <p style="color:#64748b; margin-bottom: 24px; font-size: 15px;">Your safety is our highest priority on every Pickmi trip.</p>
+
+            <div class="safety-cards-grid" style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+
+              <!-- Safety Feature 1: Emergency SOS -->
+              <div style="display: flex; align-items: flex-start; gap: 16px; padding: 20px; border: 1.5px solid #e2e8f0; border-radius: 16px; background: #ffffff;">
+                <div style="width: 48px; height: 48px; background: #ffe4e6; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #e11d48;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div>
+                  <h4 style="font-size: 16px; font-weight: 600; color: #0f172a; margin: 0 0 6px 0;">24/7 Emergency Assistance & SOS</h4>
+                  <p style="font-size: 14px; color: #64748b; margin: 0; line-height: 1.5;">Direct access to Pickmi Safety Support and 112 emergency services with one tap inside the app.</p>
+                </div>
+              </div>
+
+              <!-- Safety Feature 2: Live Trip Sharing -->
+              <div style="display: flex; align-items: flex-start; gap: 16px; padding: 20px; border: 1.5px solid #e2e8f0; border-radius: 16px; background: #ffffff;">
+                <div style="width: 48px; height: 48px; background: #eff6ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #2563eb;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <h4 style="font-size: 16px; font-weight: 600; color: #0f172a; margin: 0 0 6px 0;">Share Live Location</h4>
+                  <p style="font-size: 14px; color: #64748b; margin: 0; line-height: 1.5;">Share your real-time trip route, driver info, and estimated arrival time with your trusted contacts.</p>
+                </div>
+              </div>
+
+              <!-- Safety Feature 3: Verified Drivers & RideCheck -->
+              <div style="display: flex; align-items: flex-start; gap: 16px; padding: 20px; border: 1.5px solid #e2e8f0; border-radius: 16px; background: #ffffff;">
+                <div style="width: 48px; height: 48px; background: #f0fdf4; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #16a34a;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+                </div>
+                <div>
+                  <h4 style="font-size: 16px; font-weight: 600; color: #0f172a; margin: 0 0 6px 0;">Verified Drivers & RideCheck</h4>
+                  <p style="font-size: 14px; color: #64748b; margin: 0; line-height: 1.5;">Background checks on all drivers. Automated GPS RideCheck detects off-route delays or unannounced stops.</p>
+                </div>
+              </div>
+
+              <!-- Safety Feature 4: PIN Verification -->
+              <div style="display: flex; align-items: flex-start; gap: 16px; padding: 20px; border: 1.5px solid #e2e8f0; border-radius: 16px; background: #ffffff;">
+                <div style="width: 48px; height: 48px; background: #faf5ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #9333ea;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <div>
+                  <h4 style="font-size: 16px; font-weight: 600; color: #0f172a; margin: 0 0 6px 0;">4-Digit PIN Verification & Phone Masking</h4>
+                  <p style="font-size: 14px; color: #64748b; margin: 0; line-height: 1.5;">Verify your correct cab with a unique 4-digit PIN code. Your personal phone number is kept 100% private.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast Element -->
+  <div class="account-toast" id="accountToast">
+    <span>✓ Profile updated successfully</span>
+  </div>
+
+  <!-- Logout Alert Modal Overlay -->
+  <div class="logout-modal-overlay" id="logoutAlertOverlay">
+    <div class="logout-modal-card">
+      <div class="logout-icon-wrap">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+      </div>
+      <h3 class="logout-modal-title">Log out of Pickmi?</h3>
+      <p class="logout-modal-desc">Are you sure you want to log out of your account? You will need to log back in to manage your bookings and profile.</p>
+      <div class="logout-modal-actions">
+        <button class="logout-btn-cancel" id="cancelLogoutBtn">Cancel</button>
+        <button class="logout-btn-confirm" id="confirmLogoutBtn">Log Out</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Language Selection Modal Overlay -->
+  <div class="logout-modal-overlay" id="languageModalOverlay">
+    <div class="logout-modal-card" style="max-width: 440px; text-align: left; padding: 28px 32px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <h3 class="logout-modal-title" style="margin-bottom: 0; font-size: 22px;">Select Language</h3>
+        <button id="closeLangModalBtn" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #64748b; line-height: 1;">&times;</button>
+      </div>
+      <p class="logout-modal-desc" style="margin-bottom: 20px; text-align: left;">Choose your preferred language for site text and interface.</p>
+
+      <div class="language-options-list" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;">
+        <div class="lang-option-item active" data-lang="en" data-label="English (US)">
+          <div class="lang-option-left">
+            <span class="lang-flag">🇬🇧</span>
+            <div>
+              <div class="lang-name">English (US)</div>
+              <div class="lang-native">English</div>
+            </div>
+          </div>
+          <span class="lang-check">✓</span>
+        </div>
+
+        <div class="lang-option-item" data-lang="ta" data-label="Tamil (தமிழ்)">
+          <div class="lang-option-left">
+            <span class="lang-flag">🇮🇳</span>
+            <div>
+              <div class="lang-name">Tamil</div>
+              <div class="lang-native">தமிழ்</div>
+            </div>
+          </div>
+          <span class="lang-check">✓</span>
+        </div>
+
+        <div class="lang-option-item" data-lang="hi" data-label="Hindi (हिन्दी)">
+          <div class="lang-option-left">
+            <span class="lang-flag">🇮🇳</span>
+            <div>
+              <div class="lang-name">Hindi</div>
+              <div class="lang-native">हिन्दी</div>
+            </div>
+          </div>
+          <span class="lang-check">✓</span>
+        </div>
+
+        <div class="lang-option-item" data-lang="kn" data-label="Kannada (ಕನ್ನಡ)">
+          <div class="lang-option-left">
+            <span class="lang-flag">🇮🇳</span>
+            <div>
+              <div class="lang-name">Kannada</div>
+              <div class="lang-native">ಕನ್ನಡ</div>
+            </div>
+          </div>
+          <span class="lang-check">✓</span>
+        </div>
+
+        <div class="lang-option-item" data-lang="ml" data-label="Malayalam (മലയാളം)">
+          <div class="lang-option-left">
+            <span class="lang-flag">🇮🇳</span>
+            <div>
+              <div class="lang-name">Malayalam</div>
+              <div class="lang-native">മലയാളം</div>
+            </div>
+          </div>
+          <span class="lang-check">✓</span>
+        </div>
+
+        <div class="lang-option-item" data-lang="te" data-label="Telugu (తెలుగు)">
+          <div class="lang-option-left">
+            <span class="lang-flag">🇮🇳</span>
+            <div>
+              <div class="lang-name">Telugu</div>
+              <div class="lang-native">తెలుగు</div>
+            </div>
+          </div>
+          <span class="lang-check">✓</span>
+        </div>
+      </div>
+
+      <div class="logout-modal-actions">
+        <button class="logout-btn-cancel" id="cancelLangBtn">Cancel</button>
+        <button class="logout-btn-confirm" id="saveLangBtn" style="background:#0043DC;">Save Language</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js?v=300"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 1. Sidebar Tab Switching
+      const sidebarItems = document.querySelectorAll('.sidebar-item[data-tab]');
+      const tabPanels = document.querySelectorAll('.tab-panel');
+
+      sidebarItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetTabId = this.getAttribute('data-tab');
+
+          sidebarItems.forEach(i => i.classList.remove('active'));
+          tabPanels.forEach(p => p.classList.remove('active'));
+
+          this.classList.add('active');
+          const targetPanel = document.getElementById(targetTabId);
+          if (targetPanel) {
+            targetPanel.classList.add('active');
+          }
+        });
+      });
+
+      // Handle hash change & initial hash URL
+      function handleHash() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) {
+          const targetItem = document.querySelector(`.sidebar-item[data-tab="tab-${hash}"]`);
+          if (targetItem) {
+            sidebarItems.forEach(i => i.classList.remove('active'));
+            tabPanels.forEach(p => p.classList.remove('active'));
+            targetItem.classList.add('active');
+            const targetPanel = document.getElementById(`tab-${hash}`);
+            if (targetPanel) targetPanel.classList.add('active');
+          }
+        }
+      }
+      handleHash();
+      window.addEventListener('hashchange', handleHash);
+
+      // 2. Toast notification
+      const toast = document.getElementById('accountToast');
+      function showToast(msg) {
+        if (!toast) return;
+        toast.querySelector('span').textContent = msg || '✓ Profile updated successfully';
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3000);
+      }
+
+      // 3. Logout Confirmation Alert Handler
+      const logoutBtn = document.getElementById('sidebarLogout');
+      const logoutOverlay = document.getElementById('logoutAlertOverlay');
+      const cancelLogoutBtn = document.getElementById('cancelLogoutBtn');
+      const confirmLogoutBtn = document.getElementById('confirmLogoutBtn');
+
+      if (logoutBtn && logoutOverlay) {
+        logoutBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          logoutOverlay.classList.add('active');
+        });
+      }
+
+      if (cancelLogoutBtn && logoutOverlay) {
+        cancelLogoutBtn.addEventListener('click', function() {
+          logoutOverlay.classList.remove('active');
+        });
+      }
+
+      if (logoutOverlay) {
+        logoutOverlay.addEventListener('click', function(e) {
+          if (e.target === logoutOverlay) {
+            logoutOverlay.classList.remove('active');
+          }
+        });
+      }
+
+      if (confirmLogoutBtn) {
+        confirmLogoutBtn.addEventListener('click', function() {
+          sessionStorage.setItem('pickmi_logged_out', '1');
+          sessionStorage.removeItem('pickmi_user');
+          window.location.href = 'index.html';
+        });
+      }
+
+      // 4. Language Selection Modal & Dynamic Translation Engine
+      const rowEditLanguage = document.getElementById('rowEditLanguage');
+      const languageOverlay = document.getElementById('languageModalOverlay');
+      const closeLangModalBtn = document.getElementById('closeLangModalBtn');
+      const cancelLangBtn = document.getElementById('cancelLangBtn');
+      const saveLangBtn = document.getElementById('saveLangBtn');
+      const langOptionItems = document.querySelectorAll('.lang-option-item');
+      const displayProfileLang = document.getElementById('displayProfileLang');
+
+      const TRANSLATIONS = {
+        en: {
+          personalInfo: "Personal info",
+          myProfile: "My Profile",
+          activity: "Activity",
+          loggedInDevices: "Logged In Devices",
+          logout: "Logout",
+          nameLabel: "Name",
+          phoneLabel: "Phone number",
+          emailLabel: "Email",
+          languageLabel: "Language",
+          updateDeviceLang: "English (US)",
+          confirmLogoutTitle: "Log out of Pickmi?",
+          confirmLogoutDesc: "Are you sure you want to log out of your account? You will need to log back in to manage your bookings and profile."
+        },
+        ta: {
+          personalInfo: "தனிப்பட்ட விவரங்கள்",
+          myProfile: "என் சுயவிவரம்",
+          activity: "நடவடிக்கைகள்",
+          loggedInDevices: "உள்நுழைந்த சாதனங்கள்",
+          logout: "வெளியேறு",
+          nameLabel: "பெயர்",
+          phoneLabel: "தொலைபேசி எண்",
+          emailLabel: "மின்னஞ்சல்",
+          languageLabel: "மொழி",
+          updateDeviceLang: "Tamil (தமிழ்)",
+          confirmLogoutTitle: "பிக்மியில் இருந்து வெளியேறவா?",
+          confirmLogoutDesc: "உங்கள் கணக்கிலிருந்து வெளியேற விரும்புகிறீர்களா?"
+        },
+        hi: {
+          personalInfo: "व्यक्तिगत जानकारी",
+          myProfile: "मेरी प्रोफाइल",
+          activity: "गतिविधियां",
+          loggedInDevices: "लॉग इन डिवाइस",
+          logout: "लॉग आउट",
+          nameLabel: "नाम",
+          phoneLabel: "फोन नंबर",
+          emailLabel: "ईमेल",
+          languageLabel: "भाषा",
+          updateDeviceLang: "Hindi (हिन्दी)",
+          confirmLogoutTitle: "पिकमी से लॉग आउट करें?",
+          confirmLogoutDesc: "क्या आप अपने खाते से लॉग आउट करना चाहते हैं?"
+        },
+        kn: {
+          personalInfo: "ವೈಯಕ್ತಿಕ ಮಾಹಿತಿ",
+          myProfile: "ನನ್ನ ಪ್ರೊಫೈಲ್",
+          activity: "ಚಟುವಟಿಕೆ",
+          loggedInDevices: "ಲಾಗಿನ್ ಆದ ಸಾಧನಗಳು",
+          logout: "ಲಾಗ್ ಔಟ್",
+          nameLabel: "ಹೆಸರು",
+          phoneLabel: "ಫೋನ್ ಸಂಖ್ಯೆ",
+          emailLabel: "ಇಮೇಲ್",
+          languageLabel: "ಭಾಷೆ",
+          updateDeviceLang: "Kannada (ಕನ್ನಡ)",
+          confirmLogoutTitle: "ಪಿಕ್‌ಮಿಯಿಂದ ಲಾಗ್ ಔಟ್ ಆಗಬೇಕೆ?",
+          confirmLogoutDesc: "ಖಾತೆಯಿಂದ ನಿರ್ಗಮಿಸಲು ನೀವು ಖಚಿತವಾಗಿದ್ದೀರಾ?"
+        },
+        ml: {
+          personalInfo: "വ്യക്തിഗത വിവരങ്ങൾ",
+          myProfile: "എന്റെ പ്രൊഫൈൽ",
+          activity: "പ്രവർത്തനങ്ങൾ",
+          loggedInDevices: "ലോഗിൻ ചെയ്ത ഉപകരണങ്ങൾ",
+          logout: "ലോഗ് ഔട്ട്",
+          nameLabel: "പേര്",
+          phoneLabel: "ഫോൺ നമ്പർ",
+          emailLabel: "ഇമെയിൽ",
+          languageLabel: "ഭാഷ",
+          updateDeviceLang: "Malayalam (മലയാളം)",
+          confirmLogoutTitle: "പിക്മിയിൽ നിന്ന് ലോഗ് ഔട്ട് ചെയ്യണോ?",
+          confirmLogoutDesc: "നിങ്ങൾക്ക് അക്കൗണ്ടിൽ നിന്ന് ലോഗ് ഔട്ട് ചെയ്യണമെന്ന് ഉറപ്പാണോ?"
+        },
+        te: {
+          personalInfo: "వ్యక్తిగత సమాచారం",
+          myProfile: "నా ప్రొఫైల్",
+          activity: "కార్యకలాపాలు",
+          loggedInDevices: "లాగిన్ అయిన పరికరాలు",
+          logout: "లాగ్ అవుట్",
+          nameLabel: "పేరు",
+          phoneLabel: "ఫోన్ సంఖ్య",
+          emailLabel: "ఈమెయిల్",
+          languageLabel: "భాష",
+          updateDeviceLang: "Telugu (తెలుగు)",
+          confirmLogoutTitle: "పిక్మి నుండి లాగ్ అవుట్ అవ్వాలా?",
+          confirmLogoutDesc: "మీరు ఖాతా నుండి లాగ్ అవుట్ అవ్వాలనుకుంటున్నారా?"
+        }
+      };
+
+      let selectedLangCode = sessionStorage.getItem('pickmi_lang') || 'en';
+
+      function applyTranslations(langCode) {
+        const dict = TRANSLATIONS[langCode] || TRANSLATIONS['en'];
+        sessionStorage.setItem('pickmi_lang', langCode);
+
+        if (displayProfileLang) {
+          displayProfileLang.textContent = dict.updateDeviceLang;
+        }
+
+        // Update Titles & Labels
+        const personalInfoTitle = document.querySelector('.personal-info-title');
+        if (personalInfoTitle) personalInfoTitle.textContent = dict.personalInfo;
+
+        const activityTitle = document.querySelector('.activity-main-title');
+        if (activityTitle) activityTitle.textContent = dict.activity;
+
+        const rowNameTitle = document.querySelector('#rowEditName .info-row-title');
+        if (rowNameTitle) rowNameTitle.textContent = dict.nameLabel;
+
+        const rowPhoneTitle = document.querySelector('#rowEditPhone .info-row-title');
+        if (rowPhoneTitle) rowPhoneTitle.textContent = dict.phoneLabel;
+
+        const rowEmailTitle = document.querySelector('#rowEditEmail .info-row-title');
+        if (rowEmailTitle) rowEmailTitle.textContent = dict.emailLabel;
+
+        const rowLangTitle = document.querySelector('#rowEditLanguage .info-row-title');
+        if (rowLangTitle) rowLangTitle.textContent = dict.languageLabel;
+
+        // Active class toggle in popup list
+        langOptionItems.forEach(item => {
+          if (item.getAttribute('data-lang') === langCode) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+      }
+
+      // Initialize language state
+      applyTranslations(selectedLangCode);
+
+      if (rowEditLanguage && languageOverlay) {
+        rowEditLanguage.addEventListener('click', function() {
+          languageOverlay.classList.add('active');
+        });
+      }
+
+      if (closeLangModalBtn && languageOverlay) {
+        closeLangModalBtn.addEventListener('click', function() {
+          languageOverlay.classList.remove('active');
+        });
+      }
+
+      if (cancelLangBtn && languageOverlay) {
+        cancelLangBtn.addEventListener('click', function() {
+          languageOverlay.classList.remove('active');
+        });
+      }
+
+      if (languageOverlay) {
+        languageOverlay.addEventListener('click', function(e) {
+          if (e.target === languageOverlay) {
+            languageOverlay.classList.remove('active');
+          }
+        });
+      }
+
+      langOptionItems.forEach(item => {
+        item.addEventListener('click', function() {
+          langOptionItems.forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+          selectedLangCode = this.getAttribute('data-lang');
+        });
+      });
+
+      if (saveLangBtn) {
+        saveLangBtn.addEventListener('click', function() {
+          applyTranslations(selectedLangCode);
+          if (typeof applyGlobalTranslations === 'function') applyGlobalTranslations();
+          if (languageOverlay) languageOverlay.classList.remove('active');
+          showToast('✓ Language updated to ' + (TRANSLATIONS[selectedLangCode]?.updateDeviceLang || selectedLangCode));
+        });
+      }
+
+      // 5. Dynamic Bookings Loader from localStorage
+      function loadCustomBookings() {
+        const grid = document.querySelector('.activity-trips-grid');
+        if (!grid) return;
+        try {
+          const bookings = JSON.parse(localStorage.getItem('pickmi_bookings') || '[]');
+          bookings.forEach(b => {
+            const card = document.createElement('div');
+            card.className = 'activity-trip-card';
+            card.style.cursor = 'pointer';
+            card.style.border = '1.5px solid #bfdbfe';
+            card.style.background = '#f0fdf4';
+            card.setAttribute('data-location', b.location || 'Your Trip');
+            card.setAttribute('data-meta', b.meta || 'Today with RAJESH');
+            card.setAttribute('data-price', b.price || '₹1,450.00');
+            card.setAttribute('data-distance', b.distance || '145 km');
+            card.setAttribute('data-duration', b.duration || '2 hours 45 mins');
+            card.setAttribute('data-payment', b.payment || 'Pickmi Pay / UPI');
+            card.setAttribute('data-pickup', b.pickup || 'Bengaluru, Karnataka');
+            card.setAttribute('data-pickup-time', b.pickupTime || '10:00 AM');
+            card.setAttribute('data-drop', b.drop || b.location || 'Destination');
+            card.setAttribute('data-drop-time', b.dropTime || 'Arrival in 2h 45m');
+
+            card.innerHTML = `
+              <div class="activity-vehicle-icon">
+                <svg width="84" height="60" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <ellipse cx="50" cy="58" rx="38" ry="5" fill="#dcfce7"/>
+                  <path d="M12 42 C12 36 18 32 25 32 L38 22 C44 17 58 17 68 22 L82 32 C88 33 92 37 92 42 L92 48 C92 51 89 53 86 53 L18 53 C15 53 12 51 12 48 Z" fill="#0043DC" stroke="#1d4ed8" stroke-width="2"/>
+                  <path d="M40 23 L66 23 L76 31 L28 31 Z" fill="#93c5fd"/>
+                  <circle cx="16" cy="42" r="3" fill="#f59e0b"/>
+                  <circle cx="30" cy="52" r="8" fill="#0f172a"/>
+                  <circle cx="30" cy="52" r="4" fill="#ffffff"/>
+                  <circle cx="72" cy="52" r="8" fill="#0f172a"/>
+                  <circle cx="72" cy="52" r="4" fill="#ffffff"/>
+                </svg>
+              </div>
+              <div class="activity-trip-details">
+                <div class="activity-trip-location" style="display:flex;align-items:center;gap:8px;">
+                  <span>${b.location}</span>
+                  <span style="font-size:11px;font-weight:700;color:#15803d;background:#dcfce7;padding:2px 8px;border-radius:9999px;">Active / Confirmed</span>
+                </div>
+                <div class="activity-trip-meta">${b.meta}</div>
+                <div class="activity-trip-status" style="color:#0043DC;font-weight:700;">${b.price} • ${b.vehicle || 'Cab'}</div>
+              </div>
+            `;
+            grid.insertBefore(card, grid.firstChild);
+          });
+        } catch (e) {
+          console.error('Error loading custom bookings', e);
+        }
+      }
+
+      loadCustomBookings();
+
+      // 6. Activity Trip Detail Page Handler (Opens full standalone trip-details.html)
+      const attachTripCardListeners = () => {
+        const tripCards = document.querySelectorAll('.activity-trip-card');
+        tripCards.forEach(card => {
+          card.onclick = function() {
+            const tripData = {
+              location: this.getAttribute('data-location') || 'Your Trip',
+              meta: this.getAttribute('data-meta') || '9:02 AM with DRIVER',
+              price: this.getAttribute('data-price') || '₹224.65',
+              distance: this.getAttribute('data-distance') || '28.25 kilometres',
+              duration: this.getAttribute('data-duration') || '1 hours 2 minutes',
+              payment: this.getAttribute('data-payment') || 'Cash',
+              pickup: this.getAttribute('data-pickup') || 'Pickup Location',
+              pickupTime: this.getAttribute('data-pickup-time') || '10:00 AM',
+              drop: this.getAttribute('data-drop') || 'Drop Location',
+              dropTime: this.getAttribute('data-drop-time') || '11:00 AM'
+            };
+            sessionStorage.setItem('pickmi_selected_trip', JSON.stringify(tripData));
+            window.location.href = 'trip-details.html';
+          };
+        });
+      };
+
+      attachTripCardListeners();
+    });
+  </script>
+  <!-- Supabase JS Client Integration -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+</body>
+</html>

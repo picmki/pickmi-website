@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get a ride - Pickmi</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=300">
+  <style>
+    body {
+      background-color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #0f172a;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Top Header Bar */
+    .uber-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 64px;
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      box-sizing: border-box;
+    }
+
+    .uber-header-left {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    /* Crisp Black Brand Logo */
+    .logo-img {
+      height: 30px !important;
+      width: auto !important;
+      object-fit: contain !important;
+      filter: none !important;
+      display: block !important;
+    }
+
+    /* Center Nav Tabs */
+    .header-nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      height: 64px;
+    }
+
+    .nav-tab-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #475569;
+      text-decoration: none;
+      height: 100%;
+      padding: 0 4px;
+      box-sizing: border-box;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .nav-tab-item:hover {
+      color: #000000;
+    }
+
+    .nav-tab-item.active {
+      color: #000000;
+    }
+
+    .nav-tab-item.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #000000;
+      border-radius: 3px 3px 0 0;
+    }
+
+    /* Right Header Controls */
+    .uber-header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .activity-btn-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 9999px;
+      padding: 8px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f172a;
+      text-decoration: none;
+      transition: background 0.15s ease;
+    }
+
+    .activity-btn-link:hover {
+      background: #f1f5f9;
+    }
+
+    .user-profile-dropdown {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 9999px;
+    }
+
+    .user-avatar-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* Main Content Layout (Map Left, Card Right) */
+    .booking-page-container {
+      max-width: 1360px;
+      margin: 84px auto 40px;
+      padding: 0 24px;
+    }
+
+    .booking-split-layout {
+      display: grid;
+      grid-template-columns: 1fr 370px; /* LEFT: MAP, RIGHT: CARD */
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* LEFT SIDE MAP CONTAINER - NO BORDER & NO SHADOW */
+    .bengaluru-map-container {
+      width: 100%;
+      height: 610px;
+      background: #e4edf5;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    .map-zoom-controls {
+      position: absolute;
+      bottom: 24px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .map-zoom-btn {
+      width: 36px;
+      height: 36px;
+      background: #ffffff;
+      border: none;
+      font-size: 18px;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+    .map-zoom-btn:first-child {
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .map-google-footer {
+      position: absolute;
+      bottom: 12px;
+      left: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #475569;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 4px 10px;
+      border-radius: 4px;
+      z-index: 10;
+    }
+
+    .google-logo-text {
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: -0.03em;
+    }
+    .google-logo-text span:nth-child(1) { color: #4285F4; }
+    .google-logo-text span:nth-child(2) { color: #EA4335; }
+    .google-logo-text span:nth-child(3) { color: #FBBC05; }
+    .google-logo-text span:nth-child(4) { color: #4285F4; }
+    .google-logo-text span:nth-child(5) { color: #34A853; }
+    .google-logo-text span:nth-child(6) { color: #EA4335; }
+
+    /* RIGHT SIDE FORM CARD - NO BORDER & NO SHADOW */
+    .get-ride-card {
+      background: #ffffff;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 20px;
+      padding: 8px 4px 24px;
+    }
+
+    .card-main-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #000000;
+      margin-bottom: 16px;
+    }
+
+    /* Offer Green Banner */
+    .offer-tag-banner {
+      background: #dcfce7;
+      color: #15803d;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 14px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .offer-left-text {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-circle-icon {
+      font-size: 14px;
+      color: #16a34a;
+      cursor: pointer;
+    }
+
+    /* Inputs Wrapper */
+    .location-inputs-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .input-row-box {
+      background: #f1f5f9;
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1.5px solid transparent;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .input-row-box:focus-within {
+      background: #ffffff;
+      border-color: #000000;
+    }
+
+    .input-left-flex {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-grow: 1;
+    }
+
+    .icon-black-dot {
+      width: 10px;
+      height: 10px;
+      background: #000000;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .icon-black-square {
+      width: 10px;
+      height: 10px;
+      background: #000000;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .location-text-input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 15px;
+      font-weight: 500;
+      color: #0f172a;
+      width: 100%;
+      font-family: inherit;
+    }
+
+    .location-text-input::placeholder {
+      color: #64748b;
+    }
+
+    .add-stop-plus-btn {
+      background: #e2e8f0;
+      border: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+      flex-shrink: 0;
+    }
+
+    .add-stop-plus-btn:hover {
+      background: #cbd5e1;
+    }
+
+    /* Time & Passenger Rows */
+    .dropdown-row-box {
+      background: #f1f5f9;
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .passenger-pill-btn {
+      background: #f1f5f9;
+      border: none;
+      border-radius: 9999px;
+      padding: 8px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 20px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .passenger-pill-btn:hover {
+      background: #e2e8f0;
+    }
+
+    .search-black-submit-btn {
+      width: 100%;
+      height: 48px;
+      background: #000000;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+      font-family: inherit;
+    }
+
+    .search-black-submit-btn:hover {
+      opacity: 0.85;
+    }
+
+    /* RIDE OPTIONS OVERLAY LIST (WHEN SEARCH IS CLICKED) */
+    .ride-options-list-view {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    .ride-card-item {
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .ride-card-item.active {
+      border: 2px solid #000000;
+    }
+
+    @media (max-width: 900px) {
+      .booking-split-layout {
+        grid-template-columns: 1fr;
+      }
+      .bengaluru-map-container {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- STANDARD WEBSITE HEADER NAVBAR -->
+  <header class="header header-light" id="header" style="position: fixed !important; top: 0; left: 0; width: 100%; z-index: 10000; background: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 14px 0;">
+    <div class="container">
+      <a href="index.html" class="logo" id="logoLink">
+        <img src="images/logo-v2.png" alt="pick MI Logo" class="logo-img">
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <div class="country-selector" id="countrySelector">
+          <img src="https://flagcdn.com/w20/in.png" alt="India Flag" class="flag-icon">
+          <span class="country-code">IN</span>
+        </div>
+        
+        <span class="nav-separator"></span>
+        
+        <a href="driver.html" class="nav-link">Drive Partner</a>
+        <a href="community.html" class="nav-link">Community</a>
+        <a href="help.html" class="nav-link">Help</a>
+        
+        <span class="nav-separator"></span>
+        
+        <a href="account.html" class="account-nav-link" id="accountBtn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="account-avatar-svg">
+            <circle cx="12" cy="12" r="12" fill="#0043DC" />
+            <circle cx="12" cy="9" r="4.5" fill="#ffffff" />
+            <path d="M12 15c-4 0-7.5 2-7.5 4.8v1.2h15v-1.2c0-2.8-3.5-4.8-7.5-4.8z" fill="#ffffff" />
+          </svg>
+          <span id="navAccountName">Hi, Karthik</span>
+        </a>
+      </nav>
+
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="booking-page-container">
+    <div class="booking-split-layout">
+
+      <!-- LEFT SIDE: MAP CONTAINER (NO BORDER) -->
+      <div class="bengaluru-map-container">
+        <svg width="100%" height="100%" viewBox="0 0 900 610" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Light map background -->
+          <rect width="900" height="610" fill="#e4edf5"/>
+
+          <!-- River / Water Ribbon at Top -->
+          <path d="M420 0 C480 30, 560 20, 680 80 C800 140, 860 110, 920 160 L920 0 Z" fill="#b9e6fe" opacity="0.7"/>
+          <path d="M680 80 Q780 150 900 320" stroke="#7dd3fc" stroke-width="18" fill="none"/>
+
+          <!-- Major Highways & Primary Arterials -->
+          <path d="M-50 150 Q480 80 950 220" stroke="#ffffff" stroke-width="12"/>
+          <path d="M-50 150 Q480 80 950 220" stroke="#93c5fd" stroke-width="5"/>
+
+          <!-- Ring Road & Main Junction Line -->
+          <path d="M120 -50 L420 650" stroke="#ffffff" stroke-width="12"/>
+          <path d="M120 -50 L420 650" stroke="#60a5fa" stroke-width="5"/>
+
+          <!-- Secondary Arterial Network -->
+          <path d="M380 -50 L680 650" stroke="#ffffff" stroke-width="10"/>
+          <path d="M-50 320 L950 340" stroke="#ffffff" stroke-width="10"/>
+          <path d="M-50 320 L950 340" stroke="#93c5fd" stroke-width="4"/>
+
+          <!-- Metro Line Blue Route Ribbon -->
+          <path d="M220 50 C240 200, 390 320, 420 360 C450 400, 650 340, 920 280" stroke="#0284c7" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <!-- Green Park Areas (Lalbagh, Cubbon Park) -->
+          <path d="M540 330 C580 320, 620 340, 610 380 C600 420, 550 430, 530 390 Z" fill="#bbf7d0" opacity="0.8"/>
+          <text x="570" y="375" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle">Lalbagh</text>
+          <text x="570" y="388" font-size="10" font-weight="600" fill="#15803d" text-anchor="middle">Botanical Garden</text>
+
+          <path d="M560 210 C590 200, 620 220, 610 250 C590 270, 550 260, 540 230 Z" fill="#bbf7d0" opacity="0.8"/>
+          <text x="575" y="235" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle">Sri Chamarajendra Park</text>
+
+          <!-- CENTRAL LANDMARK LABELS -->
+          <!-- MAJESTIC CENTRAL STATION -->
+          <g transform="translate(420, 300)">
+            <circle cx="0" cy="0" r="14" fill="#ffffff" stroke="#0284c7" stroke-width="3"/>
+            <text x="0" y="4" font-size="10" font-weight="900" fill="#0284c7" text-anchor="middle">Ⓜ</text>
+            <text x="30" y="2" font-size="15" font-weight="900" fill="#0f172a" letter-spacing="0.05em">MAJESTIC</text>
+            <text x="30" y="16" font-size="12" font-weight="700" fill="#334155">ಮೆಜೆಸ್ಟಿಕ್</text>
+          </g>
+
+          <!-- Vidhana Soudha -->
+          <g transform="translate(565, 275)">
+            <circle cx="0" cy="0" r="7" fill="#64748b"/>
+            <text x="12" y="3" font-size="12" font-weight="700" fill="#334155">Vidhana Soudha</text>
+            <text x="12" y="15" font-size="10" fill="#64748b">ವಿಧಾನಸೌಧ</text>
+          </g>
+
+          <!-- Bengaluru Palace -->
+          <g transform="translate(550, 120)">
+            <circle cx="0" cy="0" r="8" fill="#c084fc"/>
+            <text x="14" y="3" font-size="13" font-weight="700" fill="#7e22ce">Bengaluru Palace</text>
+            <text x="14" y="16" font-size="10" fill="#9333ea">ಬೆಂಗಳೂರು ಅರಮನೆ</text>
+          </g>
+
+          <!-- Guttahalli & Vasanth Nagar -->
+          <text x="520" y="150" font-size="11" font-weight="600" fill="#475569">GUTTAHALLI</text>
+          <text x="580" y="170" font-size="11" font-weight="600" fill="#475569">Vasant Nagar</text>
+          <text x="350" y="180" font-size="12" font-weight="700" fill="#334155">RAJAJINAGAR</text>
+          <text x="440" y="235" font-size="11" fill="#475569">SESHADRIPURAM</text>
+          <text x="610" y="210" font-size="11" fill="#475569">SULTHANGUNTA</text>
+          <text x="810" y="170" font-size="11" fill="#475569">FRASER TOWN</text>
+          <text x="880" y="150" font-size="11" fill="#475569">MM Road</text>
+          <text x="910" y="210" font-size="11" fill="#475569">COX TOWN</text>
+
+          <!-- Commercial Street & MG Road Landmarks -->
+          <g transform="translate(630, 370)">
+            <rect x="0" y="0" width="18" height="18" rx="4" fill="#0284c7"/>
+            <text x="9" y="13" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">🔒</text>
+            <text x="24" y="14" font-size="12" font-weight="700" fill="#0369a1">UB City</text>
+          </g>
+
+          <g transform="translate(680, 420)">
+            <rect x="0" y="0" width="18" height="18" rx="4" fill="#0284c7"/>
+            <text x="9" y="13" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">🔒</text>
+            <text x="24" y="14" font-size="12" font-weight="700" fill="#0369a1">Garuda Mall</text>
+          </g>
+
+          <g transform="translate(670, 460)">
+            <text x="0" y="0" font-size="12" font-weight="700" fill="#4338ca">ITC Gardenia, a Luxury Collection...</text>
+          </g>
+
+          <!-- St Joseph's University -->
+          <text x="640" y="500" font-size="11" font-weight="600" fill="#475569">St Joseph's University</text>
+          <text x="640" y="550" font-size="12" font-weight="700" fill="#334155">SHANTI NAGAR</text>
+
+          <!-- HALASURU & Indiranagar -->
+          <text x="880" y="440" font-size="11" font-weight="600" fill="#475569">HALASURU</text>
+          <text x="880" y="495" font-size="11" font-weight="600" fill="#475569">Pizza 4P's Indiranagar</text>
+          <text x="880" y="540" font-size="11" font-weight="600" fill="#475569">HAL Old Airport Rd</text>
+
+          <!-- Chickpet & City Market -->
+          <text x="440" y="385" font-size="11" font-weight="600" fill="#475569">CHICKPET</text>
+          <text x="440" y="490" font-size="11" font-weight="600" fill="#475569">Bengaluru Fort</text>
+          <text x="440" y="525" font-size="11" stroke="#ffffff" stroke-width="3" fill="#475569">Tipu Sultan's Summer Palace</text>
+          <text x="440" y="525" font-size="11" fill="#475569">Tipu Sultan's Summer Palace</text>
+          <text x="330" y="535" font-size="12" font-weight="700" fill="#334155">CHAMRAJPET</text>
+
+          <!-- Route Pin Dot Indicators -->
+          <circle cx="420" cy="300" r="8" fill="#ef4444" stroke="#ffffff" stroke-width="3"/>
+          <circle cx="630" cy="370" r="8" fill="#10b981" stroke="#ffffff" stroke-width="3"/>
+        </svg>
+
+        <!-- Zoom Controls -->
+        <div class="map-zoom-controls">
+          <button class="map-zoom-btn" title="Zoom in">+</button>
+          <button class="map-zoom-btn" title="Zoom out">−</button>
+        </div>
+
+        <!-- Google Logo Footer -->
+        <div class="map-google-footer">
+          <div class="google-logo-text">
+            <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+          </div>
+          <span style="margin-left: 10px;">Keyboard shortcuts</span>
+          <span>•</span>
+          <span>Map Data ©2026 Google</span>
+          <span>•</span>
+          <span>Terms</span>
+          <span>•</span>
+          <span>Report a map error</span>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE: GET A RIDE FORM CARD (NO BORDER) -->
+      <div class="get-ride-card" id="getARideCard">
+        <h1 class="card-main-title">Get a ride</h1>
+
+        <!-- Green Discount Tag Banner -->
+        <div class="offer-tag-banner">
+          <div class="offer-left-text">
+            <span>🏷️</span>
+            <span>25% off your next ride. Up to ₹250 ...</span>
+          </div>
+          <span class="info-circle-icon">ⓘ</span>
+        </div>
+
+        <!-- Form Inputs -->
+        <div class="location-inputs-group">
+          <!-- Pickup Location -->
+          <div class="input-row-box">
+            <div class="input-left-flex">
+              <div class="icon-black-dot"></div>
+              <input type="text" class="location-text-input" id="pickupInput" placeholder="Pickup location" value="Bengaluru, Karnataka">
+            </div>
+          </div>
+
+          <!-- Dropoff Location -->
+          <div class="input-row-box">
+            <div class="input-left-flex">
+              <div class="icon-black-square"></div>
+              <input type="text" class="location-text-input" id="dropoffInput" placeholder="Dropoff location">
+            </div>
+            <button class="add-stop-plus-btn" title="Add stop">+</button>
+          </div>
+        </div>
+
+        <!-- Pickup Time Dropdown -->
+        <div class="dropdown-row-box" id="pickupTimeRow">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Pickup now</span>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+
+        <!-- Passenger Pill Selector -->
+        <button class="passenger-pill-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>For me</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+
+        <!-- Search Button -->
+        <button class="search-black-submit-btn" id="searchCabBtn">Search</button>
+
+        <!-- Dynamic Ride Selection List (Appears on Search) -->
+        <div class="ride-options-list-view" id="rideOptionsListView">
+          <hr style="border: none; border-top: 1px solid #f1f5f9; margin: 12px 0;" />
+          <h3 style="font-size: 16px; font-weight: 700; color: #000; margin: 0 0 4px 0;">Choose a ride</h3>
+          <p style="font-size: 13px; color: #64748b; margin: 0 0 12px 0;">Rides we think you'll like</p>
+
+          <div class="ride-card-item active">
+            <div>
+              <div style="font-size: 15px; font-weight: 700; color: #000;">Go Intercity 👤 4</div>
+              <div style="font-size: 12px; color: #64748b;">2 mins away • 8:43 PM</div>
+              <div style="background: #2563eb; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 4px;">⚡ Faster</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 16px; font-weight: 800; color: #000;">₹4,020.22 🍃</div>
+              <div style="font-size: 11px; color: #94a3b8; text-decoration: line-through;">₹4,187.73</div>
+            </div>
+          </div>
+
+          <div class="ride-card-item">
+            <div>
+              <div style="font-size: 15px; font-weight: 700; color: #000;">Sedan Intercity 👤 4</div>
+              <div style="font-size: 12px; color: #64748b;">2 mins away • 8:44 PM</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 16px; font-weight: 800; color: #000;">₹4,143.00 🍃</div>
+              <div style="font-size: 11px; color: #94a3b8; text-decoration: line-through;">₹4,315.63</div>
+            </div>
+          </div>
+
+          <div class="ride-card-item">
+            <div>
+              <div style="font-size: 15px; font-weight: 700; color: #000;">XL Intercity 👤 6</div>
+              <div style="font-size: 12px; color: #64748b;">3 mins away • 8:45 PM</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 16px; font-weight: 800; color: #000;">₹6,523.53 🍃</div>
+              <div style="font-size: 11px; color: #94a3b8; text-decoration: line-through;">₹6,795.34</div>
+            </div>
+          </div>
+
+          <button class="search-black-submit-btn" style="margin-top: 12px; background: #0043DC;" id="btnBookPickmiFinal">Book Pickmi</button>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- BOOKING SUCCESS MODAL -->
+  <div class="modal-overlay" id="bookingConfirmModal">
+    <div class="confirm-box">
+      <div class="confirm-icon-wrap">✓</div>
+      <div class="confirm-title">Ride Booked Successfully! 🚕</div>
+      <div class="confirm-subtitle" id="modalBookingId">Booking ID: PKM-102934</div>
+      
+      <div class="confirm-trip-card">
+        <div class="confirm-route" id="modalRouteText">Bengaluru ➔ Mysuru</div>
+        <div class="confirm-stats" id="modalDistanceText">Estimated Arrival in 4 mins</div>
+        <div style="font-size:16px;font-weight:800;color:#0043DC;margin-bottom:12px;" id="modalFareText">₹1,850.00 (Go Intercity)</div>
+        <div class="confirm-driver-box">
+          <div class="driver-badge-icon">👨‍✈️</div>
+          <div>
+            <div style="font-weight:700;font-size:14px;color:#0f172a;">Anand Kumar • ⭐ 4.9</div>
+            <div style="font-size:12px;color:#64748b;">Silver Honda City (KA-01-EQ-9812)</div>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="confirm-btn-primary" id="btnViewActivity">View in Activity / Trips ➔</button>
+      <button type="button" class="confirm-btn-secondary" onclick="window.location.href='index.html'">Back to Home</button>
+    </div>
+  </div>
+
+  <style>
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(4px);
+    display: none; align-items: center; justify-content: center; z-index: 10000; padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+  .confirm-box {
+    background: #ffffff; border-radius: 20px; max-width: 440px; width: 100%; padding: 32px;
+    text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.25); animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .confirm-icon-wrap {
+    width: 64px; height: 64px; border-radius: 50%; background: #dcfce7; color: #16a34a;
+    font-size: 32px; font-weight: 800; display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px; box-shadow: 0 0 0 8px #f0fdf4;
+  }
+  .confirm-title { font-size: 22px; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
+  .confirm-subtitle { font-size: 13px; color: #64748b; margin-bottom: 20px; }
+  .confirm-trip-card {
+    background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 14px; padding: 16px;
+    margin-bottom: 20px; text-align: left;
+  }
+  .confirm-route { font-size: 15px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+  .confirm-stats { font-size: 13px; color: #64748b; margin-bottom: 8px; }
+  .confirm-driver-box {
+    display: flex; align-items: center; gap: 12px; padding-top: 10px; border-top: 1px solid #e2e8f0;
+  }
+  .driver-badge-icon {
+    width: 40px; height: 40px; border-radius: 50%; background: #eff6ff; display: flex;
+    align-items: center; justify-content: center; font-size: 20px;
+  }
+  .confirm-btn-primary {
+    width: 100%; background: #0043DC; color: #ffffff; border: none; border-radius: 12px;
+    padding: 14px; font-size: 15px; font-weight: 700; cursor: pointer; margin-bottom: 8px;
+    font-family: inherit; transition: background 0.2s;
+  }
+  .confirm-btn-primary:hover { background: #003ebd; }
+  .confirm-btn-secondary {
+    width: 100%; background: #f1f5f9; color: #475569; border: none; border-radius: 12px;
+    padding: 12px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit;
+  }
+  .confirm-btn-secondary:hover { background: #e2e8f0; color: #0f172a; }
+  </style>
+
+  <script src="app.js?v=300"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchBtn = document.getElementById('searchCabBtn');
+      const rideListView = document.getElementById('rideOptionsListView');
+      const pickupInput = document.getElementById('pickupInput');
+      const dropInput = document.getElementById('dropoffInput');
+      const bookFinalBtn = document.getElementById('btnBookPickmiFinal');
+      const viewActBtn = document.getElementById('btnViewActivity');
+
+      // Check URL search parameters
+      const params = new URLSearchParams(window.location.search);
+      const urlFrom = params.get('from');
+      const urlTo = params.get('to');
+      if (urlFrom && pickupInput) pickupInput.value = urlFrom;
+      if (urlTo && dropInput) dropInput.value = urlTo;
+
+      let selectedVehicle = 'Go Intercity';
+      let selectedPrice = '₹4,020.22';
+
+      function updateRidesView() {
+        const pickup = pickupInput.value.trim() || 'Bengaluru';
+        const drop = dropInput.value.trim() || 'Destination';
+
+        // Approximate distance
+        const hash = (pickup + drop).split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
+        const distKm = 100 + (hash % 350);
+
+        const p1 = Math.round(distKm * 14 + 200);
+        const p2 = Math.round(distKm * 18 + 200);
+        const p3 = Math.round(distKm * 24 + 200);
+
+        const cards = document.querySelectorAll('.ride-card-item');
+        if (cards[0]) {
+          cards[0].querySelector('div[style*="font-size: 16px"]').innerHTML = '₹' + p1.toLocaleString('en-IN') + '.00 🍃';
+        }
+        if (cards[1]) {
+          cards[1].querySelector('div[style*="font-size: 16px"]').innerHTML = '₹' + p2.toLocaleString('en-IN') + '.00 🍃';
+        }
+        if (cards[2]) {
+          cards[2].querySelector('div[style*="font-size: 16px"]').innerHTML = '₹' + p3.toLocaleString('en-IN') + '.00 🍃';
+        }
+
+        selectedPrice = '₹' + p1.toLocaleString('en-IN') + '.00';
+
+        rideListView.style.display = 'flex';
+        rideListView.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      if (urlFrom && urlTo) {
+        updateRidesView();
+      }
+
+      if (searchBtn && rideListView) {
+        searchBtn.addEventListener('click', function() {
+          const drop = dropInput.value.trim();
+          if (!drop) {
+            alert('Please enter a destination / dropoff location');
+            dropInput.focus();
+            return;
+          }
+          updateRidesView();
+        });
+      }
+
+      // Ride Card Active Toggle
+      const rideCardItems = document.querySelectorAll('.ride-card-item');
+      rideCardItems.forEach(card => {
+        card.addEventListener('click', function() {
+          rideCardItems.forEach(c => c.classList.remove('active'));
+          this.classList.add('active');
+          const titleEl = this.querySelector('div[style*="font-size: 15px"]');
+          const priceEl = this.querySelector('div[style*="font-size: 16px"]');
+          if (titleEl) selectedVehicle = titleEl.textContent.split('👤')[0].trim();
+          if (priceEl) selectedPrice = priceEl.textContent.replace('🍃', '').trim();
+        });
+      });
+
+      // Confirm Booking
+      if (bookFinalBtn) {
+        bookFinalBtn.addEventListener('click', function() {
+          const pickup = pickupInput.value.trim() || 'Bengaluru';
+          const drop = dropInput.value.trim() || 'Mysuru';
+          const bookingId = 'PKM-' + Math.floor(100000 + Math.random() * 900000);
+
+          const newBooking = {
+            id: bookingId,
+            location: drop,
+            meta: 'Today with ANAND KUMAR',
+            price: selectedPrice,
+            distance: '145 kilometres',
+            duration: '2 hours 45 mins',
+            payment: 'Pickmi Pay / UPI',
+            pickup: pickup,
+            pickupTime: '10:00 AM',
+            drop: drop,
+            dropTime: 'Arrival in 2h 45m',
+            status: 'Confirmed • Driver Assigned',
+            vehicle: selectedVehicle
+          };
+
+          try {
+            const bList = JSON.parse(localStorage.getItem('pickmi_bookings') || '[]');
+            bList.unshift(newBooking);
+            localStorage.setItem('pickmi_bookings', JSON.stringify(bList));
+            sessionStorage.setItem('pickmi_selected_trip', JSON.stringify(newBooking));
+          } catch(e) {}
+
+          document.getElementById('modalBookingId').textContent = 'Booking ID: ' + bookingId;
+          document.getElementById('modalRouteText').textContent = pickup + ' ➔ ' + drop;
+          document.getElementById('modalFareText').textContent = selectedPrice + ' (' + selectedVehicle + ')';
+
+          document.getElementById('bookingConfirmModal').classList.add('active');
+        });
+      }
+
+      if (viewActBtn) {
+        viewActBtn.addEventListener('click', function() {
+          window.location.href = 'account.html#activity';
+        });
+      }
+    });
+  </script>
+  <!-- MYRA CHATBOT WIDGET -->
+  <!-- Floating Launcher Badge -->
+  <div class="myra-launcher" id="myraLauncher">
+    <div class="myra-bubble">
+      <span>Hi, <span class="purple-text">I am Eyes Ah</span></span>
+    </div>
+  </div>
+
+  <!-- Chat Box Window -->
+  <div class="myra-chatbox" id="myraChatbox">
+    <div class="myra-chatbox-header">
+      <span class="myra-header-title">Eyes Ah</span>
+      <button class="myra-close-btn" id="myraCloseBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <div class="myra-chatbox-body" id="myraChatBody">
+      <!-- Welcome Screen -->
+      <div id="myraWelcomeScreen">
+        <h2 class="myra-chat-title">Hi, There</h2>
+        <p class="myra-chat-subtitle">I'm Eyes Ah — your personal travel assistant. Let's plan your next trip together.</p>
+
+        <!-- Dynamic Query Cards Grid -->
+        <div class="myra-suggestions">
+          <!-- Suggestion 1: Large card -->
+          <div class="myra-card-large" onclick="sendSuggestion('Which are the best beaches to visit in India?')">
+            <div class="myra-card-large-bg" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop&q=60');">
+              <span class="myra-card-prompt">Which are the best beaches to visit in India?</span>
+            </div>
+          </div>
+
+          <!-- Suggestion 2: Small Card -->
+          <div class="myra-card-row" onclick="sendSuggestion('Which are the iconic palace hotels to experience in India?')">
+            <img src="https://images.unsplash.com/photo-1598977123418-45f04b615e0e?w=100&auto=format&fit=crop&q=60" alt="Palace Image">
+            <span class="myra-card-text">Which are the iconic palace hotels to experience in India?</span>
+          </div>
+
+          <!-- Suggestion 3: Small Card -->
+          <div class="myra-card-row" onclick="sendSuggestion('Can you suggest unique and offbeat travel destinations in India?')">
+            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=100&auto=format&fit=crop&q=60" alt="Adventure Image">
+            <span class="myra-card-text">Can you suggest unique and offbeat travel destinations in India?</span>
+          </div>
+
+          <!-- Suggestion 4: Small Card -->
+          <div class="myra-card-row" onclick="sendSuggestion('What are some perfect destinations for a memorable honeymoon?')">
+            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=100&auto=format&fit=crop&q=60" alt="Couple Image">
+            <span class="myra-card-text">What are some perfect destinations for a memorable couple trip?</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Messages Area -->
+      <div id="myraMessagesList" style="display: none; flex-direction: column; gap: 1rem; padding-bottom: 10px;">
+        <!-- Messages injected dynamically -->
+      </div>
+    </div>
+
+    <!-- Chat Box Footer Input -->
+    <div class="myra-chatbox-footer">
+      <form id="myraInputForm" style="display: flex; width: 100%; align-items: center; background-color: #f1f5f9; border-radius: 30px; padding: 6px 14px; gap: 10px;">
+        <input type="text" id="myraInputText" placeholder="Ask me anything" style="flex: 1; border: none; background: transparent; outline: none; font-size: 0.95rem; padding: 6px 0;" required>
+        <button type="submit" class="myra-send-btn" style="background-color: #0043DC; border: none; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; transition: 0.2s;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="chatbot.js"></script>
+  <!-- Supabase JS Client Integration -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+</body>
+</html>

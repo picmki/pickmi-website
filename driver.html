@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Join the Pickmi Driver Network. Flexible hours, premium payouts, and 24/7 support. Drive with Pickmi and start earning today.">
+  <meta name="keywords" content="become a driver, cab driver, taxi partner, drive and earn, pickmi driver, join pickmi">
+  <meta name="author" content="Pickmi Cabs">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.pickmicabs.com/driver.html">
+
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content="Become a Pickmi Driver Partner | Drive & Earn">
+  <meta property="og:description" content="Drive with Pickmi. Flexible schedules, low commissions, instant payouts, and premium support. Let's get you signed up today!">
+  <meta property="og:image" content="https://www.pickmicabs.com/images/hero-bg.jpg">
+  <meta property="og:url" content="https://www.pickmicabs.com/driver.html">
+  <meta property="og:type" content="website">
+
+  <title>Become a Pickmi Driver Partner | Drive & Earn</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css?v=200">
+
+  <style>
+    @keyframes headerFadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .header.sticky {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      z-index: 10000 !important;
+      background: #ffffff !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+      animation: headerFadeIn 0.3s ease-out forwards !important;
+    }
+  </style>
+
+</head>
+<body>
+
+  <!-- HEADER / NAVIGATION -->
+  <header class="header header-light" id="header">
+    <script>
+      (function() {
+        var handleScroll = function() {
+          var hdr = document.getElementById("header");
+          var b2t = document.getElementById("backToTop");
+          var pos = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+          if (pos > 50) {
+            if (hdr) hdr.classList.add("sticky");
+            if (b2t) b2t.classList.add("active");
+          } else {
+            if (hdr) hdr.classList.remove("sticky");
+            if (b2t) b2t.classList.remove("active");
+          }
+        };
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        document.addEventListener("scroll", handleScroll, { passive: true });
+        document.addEventListener("DOMContentLoaded", handleScroll);
+        // Force an immediate check just in case it's mid-page
+        handleScroll();
+      })();
+    </script>
+    <div class="container">
+      <a href="index.html" class="logo" id="logoLink">
+        <img src="images/logo-v2.png" alt="pick MI Logo" class="logo-img">
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <div class="country-selector" id="countrySelector">
+          <img src="https://flagcdn.com/w20/in.png" alt="India Flag" class="flag-icon">
+          <span class="country-code">IN</span>
+        </div>
+        
+        <span class="nav-separator"></span>
+        
+        <a href="driver.html" class="nav-link active">Drive Partner</a>
+        <a href="community.html" class="nav-link">Community</a>
+        <a href="help.html" class="nav-link">Help</a>
+        
+        <span class="nav-separator"></span>
+        
+        <a href="index.html#account" class="account-nav-link" id="accountBtn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="account-avatar-svg">
+            <circle cx="12" cy="12" r="12" fill="#94a3b8" />
+            <circle cx="12" cy="9" r="4.5" fill="#ffffff" />
+            <path d="M12 15c-4 0-7.5 2-7.5 4.8v1.2h15v-1.2c0-2.8-3.5-4.8-7.5-4.8z" fill="#ffffff" />
+          </svg>
+          <span>Account</span>
+        </a>
+      </nav>
+
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- DRIVER HERO SECTION -->
+  <section class="driver-hero">
+    <div class="container">
+      <div class="driver-hero-content">
+        <span class="driver-hero-subtitle">Drive. <span class="highlight">Earn</span>. Repeat.</span>
+        <h1 class="driver-hero-title">Join the Pickmi Driver Network<br>Let's Get You Signed Up! 😇</h1>
+        <a href="#download" class="driver-hero-cta" id="heroCtaBtn">
+          <span>Sign Up Pickmi Driver</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+      <div class="driver-hero-mockup-wrapper">
+        <div class="driver-hero-mockup-bg"></div>
+        <img src="images/phone-mockup-app.png" alt="Pickmi Driver App" class="driver-hero-phone">
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS SECTION -->
+  <section class="driver-steps">
+    <div class="container">
+      <h2 class="driver-steps-title">Drive with Pickmi in 3 Simple Steps</h2>
+      <div class="driver-steps-grid">
+        <div class="driver-step-card">
+          <div class="driver-step-number">1</div>
+          <h3>Sign Up Online</h3>
+          <p>Fill out the application form with your driving license, national ID, and vehicle registration documents.</p>
+        </div>
+        <div class="driver-step-card">
+          <div class="driver-step-number">2</div>
+          <h3>Get Verified</h3>
+          <p>Our verification team will review your application and documents to ensure a safe community standard.</p>
+        </div>
+        <div class="driver-step-card">
+          <div class="driver-step-number">3</div>
+          <h3>Start Earning</h3>
+          <p>Download the Pickmi Driver partner app, go online, accept rides, and watch your earnings grow!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VEHICLE CATEGORIES SECTION -->
+  <section class="vehicle-categories-section">
+    <div class="container">
+      <div class="vehicle-categories-card">
+        <h2 class="vehicle-categories-title">Vehicle Categories You Can Drive</h2>
+        
+        <div class="vehicle-tabs-row" role="tablist">
+          <button class="vehicle-tab-btn active" data-category="hatchback" role="tab" aria-selected="true" aria-label="Hatchback tab">
+            <img src="images/hatchback-vector.png" alt="Hatchback Cab">
+          </button>
+          <button class="vehicle-tab-btn" data-category="sedan" role="tab" aria-selected="false" aria-label="Sedan tab">
+            <img src="images/car-vector.png" alt="Sedan Cab">
+          </button>
+          <button class="vehicle-tab-btn" data-category="suv" role="tab" aria-selected="false" aria-label="SUV tab">
+            <img src="images/suv-vector.png" alt="SUV Cab">
+          </button>
+        </div>
+
+        <div class="vehicle-content-block">
+          <div class="vehicle-content-left">
+            <div class="vehicle-cat-header">
+              <h3 class="vehicle-cat-title" id="driverVehicleTitle">Hatchback</h3>
+              <p class="vehicle-cat-subtitle" id="driverVehicleSubtitle">Daily city commutes and affordable rides</p>
+            </div>
+
+            <div class="vehicle-sub-section">
+              <h4>Models</h4>
+              <div class="pill-container" id="driverVehicleModels">
+                <span class="pill-item">Swift</span>
+                <span class="pill-item">WagonR</span>
+                <span class="pill-item">Celerio</span>
+                <span class="pill-item">Hyundai i10</span>
+                <span class="pill-item">Tata Tiago</span>
+              </div>
+            </div>
+
+            <div class="vehicle-sub-section">
+              <h4>Mandatory</h4>
+              <div class="pill-container" id="driverVehicleMandatory">
+                <span class="pill-item">T-Board Vehicle</span>
+                <span class="pill-item">Vehicle Insurance</span>
+                <span class="pill-item">Vehicle Fitness Certificate</span>
+                <span class="pill-item">Pollution Certificate (PUC)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vehicle-content-right">
+            <h4>Basic Price</h4>
+            <div class="price-card-box">
+              <div class="price-grid">
+                <div class="price-item">
+                  <span class="price-val" id="priceValIncity">₹12/km</span>
+                  <span class="price-lbl">In-City</span>
+                </div>
+                <div class="price-item">
+                  <span class="price-val" id="priceValOutstation">₹10/km</span>
+                  <span class="price-lbl">Outstation Extra KM</span>
+                </div>
+                <div class="price-item">
+                  <span class="price-val" id="priceValRental">₹200/hr</span>
+                  <span class="price-lbl">Hourly Rental</span>
+                </div>
+              </div>
+              <div class="info-footnote">
+                <svg class="info-footnote-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>Night charges, driver allocation, tolls, and interstate charges extra.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS SECTION -->
+  <section class="driver-benefits">
+    <div class="container">
+      <div class="driver-benefits-card">
+        <h2 class="driver-benefits-title">Why Partner with Pickmi?</h2>
+        <div class="driver-benefits-grid">
+          <div class="driver-benefit-card">
+            <div class="driver-benefit-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            </div>
+            <div class="driver-benefit-content">
+              <h3>Higher Take-Home Payouts</h3>
+              <p>Our industry-low commissions mean you keep the vast majority of every fare. No hidden platform cuts.</p>
+            </div>
+          </div>
+          <div class="driver-benefit-card">
+            <div class="driver-benefit-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <div class="driver-benefit-content">
+              <h3>Set Your Own Hours</h3>
+              <p>Drive whenever it suits you. Full time, part time, or just a few hours on weekends. You are in control.</p>
+            </div>
+          </div>
+          <div class="driver-benefit-card">
+            <div class="driver-benefit-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <div class="driver-benefit-content">
+              <h3>Safety First Mindset</h3>
+              <p>Rider verification, real-time trip sharing, and a 24/7 dedicated driver support hotline to keep you safe.</p>
+            </div>
+          </div>
+          <div class="driver-benefit-card">
+            <div class="driver-benefit-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            </div>
+            <div class="driver-benefit-content">
+              <h3>Fleet Owner Programs</h3>
+              <p>Manage multiple cars, track driver performance, and optimize your business from our centralized partner panel.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOBILE APP BANNER SECTION -->
+  <section class="app-section section-padding" id="download">
+    <div class="container">
+      
+      <div class="app-promo-card">
+        
+        <!-- Left Column: Black Backdrop & Phone Mockup -->
+        <div class="app-promo-blue app-promo-black">
+          <img src="images/phone-mockup-app.png?v=100" alt="Pickmi Mobile App" class="app-promo-phone">
+        </div>
+
+        <!-- Right Column: Text and Downloads -->
+        <div class="app-promo-white">
+          <h2 class="app-promo-title">Globally top-rated and MENA's #1 travel app, with 83M+ downloads</h2>
+          
+          <div class="app-promo-bullets">
+            <span class="promo-bullet"><span class="bullet-check">✓</span> App-only deals</span>
+            <span class="promo-bullet"><span class="bullet-check">✓</span> 700+ sites in one search</span>
+            <span class="promo-bullet"><span class="bullet-check">✓</span> Safe, secure bookings</span>
+          </div>
+
+          <div class="app-promo-download-block">
+            <!-- Vector QR Code -->
+            <div class="qr-code-wrapper">
+              <svg class="qr-code" width="90" height="90" viewBox="0 0 29 29" fill="black">
+                <path d="M0 0h7v7H0zm1 1v5h5V1zm22-1h7v7h-7zm1 1v5h5V1zM0 22h7v7H0zm1 1v5h5V23zm15-18h2v2h-2zm4 0h2v2h-2zm-2 2h2v2h-2zm4 0h2v2h-2zm-6 2h2v2h-2zm4 0h2v2h-2zm2 2h2v2h-2zm2 2h2v2h-2zm-6 2h2v2h-2zm-4 4h2v2h-2zm2 2h2v2h-2zm-4 2h2v2h-2zm6-6h2v2h-2zm0 4h2v2h-2zm4-2h2v2h-2zm2 2h2v2h-2zm4 0h2v2h-2zm-4 4h2v2h-2zm4 0h2v2h-2z" />
+                <path d="M2 2h3v3H2zm23 0h3v3h-3zM2 24h3v3H2z" />
+              </svg>
+            </div>
+
+            <!-- Google Play & Rating -->
+            <div class="download-actions-wrapper">
+              <a href="#" class="store-badge-play">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path d="M3.25 3.25L12 12L3.25 20.75C3.1 20.3 3 19.7 3 19V5C3 4.3 3.1 3.7 3.25 3.25Z" fill="#00E676"/>
+                  <path d="M3.25 3.25L15.5 9.5L12 12L3.25 3.25Z" fill="#FF1744"/>
+                  <path d="M3.25 20.75L12 12L15.5 14.5L3.25 20.75Z" fill="#00B0FF"/>
+                  <path d="M15.5 9.5L20.25 11.75C20.7 12 21 12.45 21 13s-.3 1-.75 1.25L15.5 17.5L12 12L15.5 9.5Z" fill="#FFD600"/>
+                </svg>
+                <div class="store-badge-text">
+                  <span class="store-sub">GET IT ON</span>
+                  <span class="store-title">Google Play</span>
+                </div>
+              </a>
+
+              <div class="app-promo-rating">
+                <div class="rating-row">
+                  <span class="rating-num">4.6</span>
+                  <div class="rating-stars">
+                    <span class="star filled">★</span>
+                    <span class="star filled">★</span>
+                    <span class="star filled">★</span>
+                    <span class="star filled">★</span>
+                    <span class="star half">★</span>
+                  </div>
+                </div>
+                <span class="rating-reviews">193,524+ reviews</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+
+
+
+  <!-- DIRECTORY & SEO OFFERINGS SECTION (BEFORE FOOTER) -->
+  <section class="directory-seo-section" id="directorySeo">
+    <div class="container">
+      <div class="directory-seo-wrapper">
+        
+        <!-- Category 1 -->
+        <div class="directory-seo-block">
+          <h4 class="directory-seo-title">WHAT WE ARE OFFERING</h4>
+          <p class="directory-seo-text">
+            Taxi Booking, Cab Booking, Online Taxi Booking, Online Cab Booking, Book Taxi Online, Book Cab Online, Taxi Service, Cab Service, Taxi Near Me, Cab Near Me, Best Taxi Service, Best Cab Service, Affordable Taxi, Cheap Cab Booking, Reliable Taxi Service, Professional Cab Service, Trusted Taxi Service, Premium Cab Service, 24/7 Taxi Service, Instant Cab Booking, Drop Taxi, Drop Cab, One Way Taxi, One Way Cab, One Way Drop Taxi, Drop Only Taxi, Drop Only Cab, One Side Taxi, One Side Cab Fare, Pay for Drop Only, Half Fare Drop Taxi, No Return Fare Taxi, Oneway Drop Cab Booking
+          </p>
+        </div>
+
+        <!-- Category 2 -->
+        <div class="directory-seo-block">
+          <h4 class="directory-seo-title">OUTSTATION</h4>
+          <p class="directory-seo-text">
+            Outstation Taxi, Outstation Cab, Outstation Cab Booking, Outstation Taxi Booking, Intercity Taxi, Intercity Cab, Long Distance Taxi, Long Distance Cab, Interstate Taxi, One Way Outstation Cab, One Way Taxi, Round Trip Taxi, Round Trip Cab, Multi City Taxi, Multi Destination Cab, Family Trip Taxi, Weekend Trip Cab
+          </p>
+        </div>
+
+        <!-- Category 3 -->
+        <div class="directory-seo-block">
+          <h4 class="directory-seo-title">AIRPORT</h4>
+          <p class="directory-seo-text">
+            Airport Taxi, Airport Cab, Airport Transfer, Airport Pickup, Airport Drop, Airport Shuttle, Airport Transportation, Airport Taxi Booking, Airport Cab Booking, 24 Hour Airport Taxi, Airport Taxi Near Me, Airport Pickup Service, Airport Drop Service, Airport Chauffeur, Airport Ride
+          </p>
+        </div>
+
+        <!-- Category 4 -->
+        <div class="directory-seo-block">
+          <h4 class="directory-seo-title">LOCAL & SMART CITY TAXI — SERVING ACROSS INDIA'S SMART CITIES</h4>
+          <p class="directory-seo-text">
+            Local Taxi, Local Cab, Smart City Taxi, Smart City Cab, City Taxi, City Cab, Local Cab Booking, Hourly Taxi, Hourly Cab, Rental Taxi, Rental Cab, Full Day Cab, Half Day Cab, Daily Cab Rental, Local Travel Cab, Local Sightseeing Cab, Chennai, Coimbatore, Madurai, Tiruchirappalli, Salem, Tirunelveli, Tiruppur, Erode, Vellore, Thanjavur, Thoothukudi, Dindigul, Bengaluru, Mangaluru, Hubballi-Dharwad, Belagavi, Davanagere, Shivamogga, Tumakuru, Hyderabad, Warangal, Karimnagar, Visakhapatnam, Tirupati, Kakinada, Amaravati, Kochi, Thiruvananthapuram, Kozhikode, Mumbai, Pune, Nagpur, Nashik, Thane, Aurangabad, Kalyan-Dombivli, Solapur, Ahmedabad, Surat, Vadodara, Rajkot, Gandhinagar, Dahod, Delhi, New Delhi, NDMC, Jaipur, Udaipur, Kota, Ajmer, Bhopal, Indore, Jabalpur, Gwalior, Ujjain, Sagar, Satna, Lucknow, Kanpur, Varanasi, Agra, Prayagraj, Aligarh, Bareilly, Jhansi, Moradabad, Rampur, Saharanpur, Kolkata, New Town Kolkata, Bidhannagar, Durgapur, Haldia, Bhubaneswar, Rourkela, Patna, Bhagalpur, Muzaffarpur, Biharsharif, Ranchi, Chandigarh, Dehradun, Shimla, Jammu, Srinagar, Panaji, Puducherry, Port Blair, Silvassa, Kavaratti, Diu, Imphal, Agartala, Aizawl, Kohima, Itanagar, Shillong, Gangtok, Guwahati, Namchi, Pasighat
+          </p>
+        </div>
+
+        <!-- Category 5 -->
+        <div class="directory-seo-block">
+          <h4 class="directory-seo-title">TOURISM FOR BUSINESS & CORPORATE — EVERYWHERE WE SERVE</h4>
+          <p class="directory-seo-text">
+            Corporate Taxi, Corporate Cab, Employee Transportation, Business Travel Cab, Office Cab, Staff Transportation, Company Cab Service, Corporate Airport Transfer, Business Taxi Booking, Executive Taxi, Executive Cab, Hotel Taxi Service, Tourist Taxi, Tourist Cab, Holiday Cab, Vacation Taxi, Sightseeing Taxi, Hill Station Taxi, Pilgrimage Taxi, Temple Tour Taxi, Family Tour Cab, Group Travel Taxi, Weekend Getaway Cab, Travel Taxi Service
+          </p>
+        </div>
+
+        <!-- Category 6 -->
+        <div class="directory-seo-block">
+          <h4 class="directory-seo-title">VEHICLE</h4>
+          <p class="directory-seo-text">
+            Sedan Cab, SUV Cab, Hatchback Cab, Innova Taxi, Innova Crysta Taxi, Ertiga Taxi, Swift Dzire Taxi, Xcent Taxi, Etios Taxi, Tempo Traveller Rental, Luxury Taxi, Premium SUV Taxi, AC Taxi, Chauffeur Driven Car
+          </p>
+        </div>
+
+        <!-- Category 7 -->
+        <div class="directory-seo-block">
+          <h4 class="directory-seo-title">WHY CUSTOMERS PREFER US</h4>
+          <p class="directory-seo-text">
+            Best Rates Guarantee, No Hidden Charges, Professional Drivers, Clean & Hygienic Cabs, 24/7 Customer Support, Instant Booking Confirmation, Flexible Payment Options, On-time Pickup Guarantee
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      
+      <div class="footer-top">
+        
+        <div class="footer-brand">
+          <div class="footer-logo">pick<span>mi</span></div>
+          <p class="footer-desc">Premium outstation, airport, and local car rentals offering safety, visual transparency, and budget-friendly pricing.</p>
+          <div class="social-links">
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Twitter">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" /></svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#outstation" class="footer-link">Outstation One-Way</a></li>
+            <li><a href="index.html#outstation" class="footer-link">Outstation Round-Trip</a></li>
+            <li><a href="index.html#airport" class="footer-link">Airport Transfers</a></li>
+            <li><a href="index.html#rentals" class="footer-link">Hourly Rentals</a></li>
+            <li><a href="index.html#corporate" class="footer-link">Corporate Cabs</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Cities served</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#cities" class="footer-link">Bangalore Cabs</a></li>
+            <li><a href="index.html#cities" class="footer-link">Pune Cabs</a></li>
+            <li><a href="index.html#cities" class="footer-link">Mumbai Cabs</a></li>
+            <li><a href="index.html#cities" class="footer-link">Hyderabad Cabs</a></li>
+            <li><a href="index.html#cities" class="footer-link">Chennai Cabs</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Drive With Us</h4>
+          <ul class="footer-links">
+            <li><a href="driver.html" class="footer-link">Become a Driver Partner</a></li>
+            <li><a href="#" class="footer-link">Fleet Owner Program</a></li>
+            <li><a href="#" class="footer-link">Partner Login</a></li>
+            <li><a href="#" class="footer-link">Community Standards</a></li>
+            <li><a href="#" class="footer-link">Safety Measures</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Support & Legal</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Help Center</a></li>
+            <li><a href="#" class="footer-link">Contact Us</a></li>
+            <li><a href="#" class="footer-link">Terms of Service</a></li>
+            <li><a href="privacy-policy.html" class="footer-link">Privacy Policy</a></li>
+            <li><a href="#" class="footer-link">Cookie Preferences</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Pickmi Cabs. All rights reserved. Built with love in Pune, India.</p>
+        <div class="footer-meta">
+          <div class="footer-meta-item">
+            <img src="https://flagcdn.com/w20/in.png" alt="India Flag" class="flag-icon">
+            <span>India / English</span>
+          </div>
+          <div class="footer-meta-item">
+            <span>₹ INR</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Script for driver interactions -->
+  <script>
+    // Sticky navbar on scroll
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('sticky');
+      } else {
+        header.classList.remove('sticky');
+      }
+    });
+
+    // Mobile Hamburger Menu
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Close mobile menu when links are clicked
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+
+
+
+
+
+    // Smooth scroll for hero CTA
+    document.getElementById('heroCtaBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+
+    // Vehicle Categories Switcher logic
+    const driverVehicleTabs = document.querySelectorAll('.vehicle-tab-btn');
+    const vehicleContentData = {
+      hatchback: {
+        title: "Hatchback",
+        subtitle: "Daily city commutes and affordable rides",
+        models: ["Swift", "WagonR", "Celerio", "Hyundai i10", "Tata Tiago"],
+        mandatory: ["T-Board Vehicle", "Vehicle Insurance", "Vehicle Fitness Certificate", "Pollution Certificate (PUC)"],
+        prices: {
+          incity: "₹12/km",
+          outstation: "₹10/km",
+          rental: "₹200/hr"
+        }
+      },
+      sedan: {
+        title: "Sedan",
+        subtitle: "Comfortable sedans for business and family travel",
+        models: ["Dzire", "Etios", "Amaze", "Hyundai Aura", "Tigor"],
+        mandatory: ["T-Board Vehicle", "Vehicle Insurance", "Vehicle Fitness Certificate", "Pollution Certificate (PUC)"],
+        prices: {
+          incity: "₹14/km",
+          outstation: "₹12/km",
+          rental: "₹250/hr"
+        }
+      },
+      suv: {
+        title: "SUV / MUV",
+        subtitle: "Spacious SUVs for family outings and group travels",
+        models: ["Ertiga", "Innova Crysta", "Marazzo", "Triber", "Kia Carens"],
+        mandatory: ["T-Board Vehicle", "Vehicle Insurance", "Vehicle Fitness Certificate", "Pollution Certificate (PUC)"],
+        prices: {
+          incity: "₹18/km",
+          outstation: "₹16/km",
+          rental: "₹350/hr"
+        }
+      }
+    };
+
+    driverVehicleTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Toggle active tab class
+        driverVehicleTabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        const category = tab.getAttribute('data-category');
+        const data = vehicleContentData[category];
+
+        if (data) {
+          // Update Text & Subtitle
+          document.getElementById('driverVehicleTitle').innerText = data.title;
+          document.getElementById('driverVehicleSubtitle').innerText = data.subtitle;
+
+          // Update Models Pills
+          const modelsContainer = document.getElementById('driverVehicleModels');
+          modelsContainer.innerHTML = '';
+          data.models.forEach(model => {
+            const pill = document.createElement('span');
+            pill.className = 'pill-item';
+            pill.innerText = model;
+            modelsContainer.appendChild(pill);
+          });
+
+          // Update Mandatory Pills
+          const mandatoryContainer = document.getElementById('driverVehicleMandatory');
+          mandatoryContainer.innerHTML = '';
+          data.mandatory.forEach(item => {
+            const pill = document.createElement('span');
+            pill.className = 'pill-item';
+            pill.innerText = item;
+            mandatoryContainer.appendChild(pill);
+          });
+
+          // Update Prices
+          document.getElementById('priceValIncity').innerText = data.prices.incity;
+          document.getElementById('priceValOutstation').innerText = data.prices.outstation;
+          document.getElementById('priceValRental').innerText = data.prices.rental;
+        }
+    });
+  </script>
+
+  <!-- MYRA CHATBOT WIDGET -->
+  <!-- Floating Launcher Badge -->
+  <div class="myra-launcher" id="myraLauncher">
+    <div class="myra-bubble">
+      <span>Hi, <span class="purple-text">I am Eyes Ah</span></span>
+    </div>
+  </div>
+
+  <!-- Chat Box Window -->
+  <div class="myra-chatbox" id="myraChatbox">
+    <div class="myra-chatbox-header">
+      <span class="myra-header-title">Eyes Ah</span>
+      <button class="myra-close-btn" id="myraCloseBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <div class="myra-chatbox-body" id="myraChatBody">
+      <!-- Welcome Screen -->
+      <div id="myraWelcomeScreen">
+        <h2 class="myra-chat-title">Hi, There</h2>
+        <p class="myra-chat-subtitle">I'm Eyes Ah — your personal travel assistant. Let's plan your next trip together.</p>
+
+        <!-- Dynamic Query Cards Grid -->
+        <div class="myra-suggestions">
+          <!-- Suggestion 1: Large card -->
+          <div class="myra-card-large" onclick="sendSuggestion('Which are the best beaches to visit in India?')">
+            <div class="myra-card-large-bg" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop&q=60');">
+              <span class="myra-card-prompt">Which are the best beaches to visit in India?</span>
+            </div>
+          </div>
+
+          <!-- Suggestion 2: Small Card -->
+          <div class="myra-card-row" onclick="sendSuggestion('Which are the iconic palace hotels to experience in India?')">
+            <img src="https://images.unsplash.com/photo-1598977123418-45f04b615e0e?w=100&auto=format&fit=crop&q=60" alt="Palace Image">
+            <span class="myra-card-text">Which are the iconic palace hotels to experience in India?</span>
+          </div>
+
+          <!-- Suggestion 3: Small Card -->
+          <div class="myra-card-row" onclick="sendSuggestion('Can you suggest unique and offbeat travel destinations in India?')">
+            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=100&auto=format&fit=crop&q=60" alt="Adventure Image">
+            <span class="myra-card-text">Can you suggest unique and offbeat travel destinations in India?</span>
+          </div>
+
+          <!-- Suggestion 4: Small Card -->
+          <div class="myra-card-row" onclick="sendSuggestion('What are some perfect destinations for a memorable honeymoon?')">
+            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=100&auto=format&fit=crop&q=60" alt="Couple Image">
+            <span class="myra-card-text">What are some perfect destinations for a memorable couple trip?</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Messages Area -->
+      <div id="myraMessagesList" style="display: none; flex-direction: column; gap: 1rem; padding-bottom: 10px;">
+        <!-- Messages injected dynamically -->
+      </div>
+    </div>
+
+    <!-- Chat Box Footer Input -->
+    <div class="myra-chatbox-footer">
+      <form id="myraInputForm" style="display: flex; width: 100%; align-items: center; background-color: #f1f5f9; border-radius: 30px; padding: 6px 14px; gap: 10px;">
+        <input type="text" id="myraInputText" placeholder="Ask me anything" style="flex: 1; border: none; background: transparent; outline: none; font-size: 0.95rem; padding: 6px 0;" required>
+        <button type="submit" class="myra-send-btn" style="background-color: #0043DC; border: none; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; transition: 0.2s;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Eyes Ah AI Assistant Script -->
+  <script src="chatbot.js"></script>
+  <script src="app.js?v=300"></script>
+
+  <!-- SPLIT-SCREEN LOGIN MODAL -->
+  <div class="login-modal-overlay" id="splitLoginModalOverlay">
+    <div class="login-modal" id="splitLoginModal">
+      <button class="login-modal-close" id="splitLoginModalClose">&times;</button>
+      <div class="login-modal-left" style="background-image: url('images/hero-bg.jpg');">
+      </div>
+      <div class="login-modal-right">
+        
+        <!-- STEP 1: MOBILE NUMBER ENTRY -->
+        <div id="authStepMobile" class="auth-step">
+          <h2 class="login-title" id="authModalTitle">Welcome to Pickmi</h2>
+          <p class="login-subtitle">Sign in or create an account to manage your rides and preferences.</p>
+          
+          <form class="login-form" id="formStepMobile">
+            <div class="phone-input-group">
+              <div class="phone-flag">
+                <img src="https://flagcdn.com/w20/in.png" alt="IN">
+              </div>
+              <input type="tel" id="authMobileInput" placeholder="Enter Mobile Number" class="login-input phone-input" pattern="[0-9]{10}" maxlength="10" required>
+            </div>
+            
+            <button type="submit" class="login-submit-btn" id="btnSendOtp">Continue</button>
+          </form>
+          
+          <p class="login-footer-text">By continuing you agree with the <a href="#">terms and conditions</a> of Pickmi</p>
+        </div>
+
+        <!-- STEP 2: OTP VERIFICATION -->
+        <div id="authStepOtp" class="auth-step" style="display: none;">
+          <h2 class="login-title">Verify OTP</h2>
+          <p class="login-subtitle" id="otpSubText">Enter the 4-digit OTP sent to your mobile number.</p>
+          
+          <form class="login-form" id="formStepOtp">
+            <input type="text" id="authOtpInput" placeholder="Enter 6-digit OTP" class="login-input" maxlength="6" pattern="[0-9]{4}" style="text-align: center; letter-spacing: 6px; font-size: 1.2rem; font-weight: 700;" required>
+            
+            <button type="submit" class="login-submit-btn" id="btnVerifyOtp">Verify OTP</button>
+          </form>
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; font-size: 0.85rem;">
+            <button type="button" id="btnBackToMobile" style="background: none; border: none; color: #0043DC; cursor: pointer; font-weight: 600;">← Change Number</button>
+            <button type="button" id="btnResendOtp" style="background: none; border: none; color: #64748b; cursor: pointer;">Resend OTP</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: NEW USER REGISTRATION -->
+        <div id="authStepRegister" class="auth-step" style="display: none;">
+          <h2 class="login-title">Create Account</h2>
+          <p class="login-subtitle">Looks like you're new here! Fill in your details to create an account.</p>
+          
+          <form class="login-form" id="formStepRegister">
+            <input type="text" id="authNameInput" placeholder="Full Name" class="login-input" required>
+            <input type="email" id="authEmailInput" placeholder="Email Address" class="login-input" required>
+            
+            <select id="authGenderSelect" class="login-input login-select" required>
+              <option value="" disabled selected>Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            
+            <button type="submit" class="login-submit-btn" id="btnCompleteRegister">Create Account &amp; Login</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase JS Client Integration -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+</body>
+</html>

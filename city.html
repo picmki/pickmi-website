@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pickmi Cabs — City</title>
+  <meta name="description" content="Book premium cabs in your city with Pickmi. Budget-friendly, safe, and on-time rides.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=200">
+  <style>
+    /* =========================================
+       CITY PAGE SPECIFIC STYLES
+    ========================================= */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0f172a;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    /* City page — logo group with city name (scoped, won't affect other pages) */
+    .city-logo-group {
+      display: flex;
+      align-items: center;
+    }
+
+    .city-logo-sep {
+      color: rgba(255,255,255,0.5);
+      font-size: 1.3rem;
+      font-weight: 300;
+      margin: 0 14px;
+      line-height: 1;
+    }
+
+    .header.sticky .city-logo-sep {
+      color: rgba(15,23,42,0.3);
+    }
+
+    .city-logo-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .header.sticky .city-logo-name {
+      color: #0f172a;
+    }
+
+    /* --- City Header / Nav --- */
+    .header {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 14px 60px;
+      background: transparent;
+    }
+
+    .header.sticky {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      z-index: 1000 !important;
+      background: #ffffff !important;
+      padding: 10px 60px !important;
+    }
+
+    .city-nav-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .city-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .city-nav-logo {
+      width: 34px;
+      height: 34px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.9rem;
+      color: #0043DC;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .city-nav-sep {
+      width: 1px;
+      height: 20px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    .city-nav-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+
+    .city-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .city-nav-flag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .city-nav-divider {
+      width: 1px;
+      height: 18px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    .city-nav-account {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .city-nav-account svg {
+      opacity: 0.8;
+    }
+
+    /* --- City Hero --- */
+    .city-hero {
+      position: relative;
+      height: 95vh;
+      min-height: 580px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 60px;
+    }
+
+    .city-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: opacity 0.8s ease;
+    }
+
+    .city-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.3) 0%,
+        rgba(0,0,0,0.1) 30%,
+        rgba(0,0,0,0.55) 65%,
+        rgba(0,0,0,0.88) 100%
+      );
+    }
+
+    .city-hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .city-hero-title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    }
+
+    .city-hero-tagline {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .city-hero-tagline::before,
+    .city-hero-tagline::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.4);
+    }
+
+    /* --- Booking Widget --- */
+    .city-booking-wrap {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      max-width: 1280px;
+      padding: 0 30px;
+    }
+
+    .city-booking-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 48px 48px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+
+    /* Booking Tabs */
+    .city-booking-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 32px;
+      background: #f1f5f9;
+      border-radius: 50px;
+      padding: 4px;
+      width: fit-content;
+    }
+
+    .city-tab {
+      padding: 7px 20px;
+      border-radius: 50px;
+      border: none;
+      background: transparent;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .city-tab.active {
+      background: #0043DC;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 82, 255, 0.3);
+    }
+
+    .city-tab:hover:not(.active) {
+      color: #0043DC;
+      background: rgba(0, 82, 255, 0.06);
+    }
+
+    /* Booking Grid */
+    .city-form-grid {
+      display: grid;
+      grid-template-columns: 1.5fr auto 1.5fr 1.2fr 1.2fr auto;
+      gap: 16px;
+      align-items: end;
+    }
+
+    .city-input-group {
+      padding: 0;
+      border-right: none;
+      position: relative;
+    }
+
+    .city-input-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 8px;
+    }
+
+    .city-input-inner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f8fafc;
+      border: 1px solid #f1f5f9;
+      border-radius: 12px;
+      padding: 0 16px;
+      height: 52px;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .city-input-inner:focus-within {
+      border-color: #0043DC;
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(0, 82, 255, 0.1);
+    }
+
+    .city-input-inner svg.city-field-icon {
+      color: #64748b;
+      flex-shrink: 0;
+    }
+
+    .city-input-inner svg.city-field-icon.right-icon {
+      margin-left: auto;
+      pointer-events: none;
+    }
+
+    .city-input-inner input {
+      border: none;
+      outline: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #0f172a;
+      background: transparent;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+    }
+
+    .city-input-inner input::placeholder {
+      color: #94a3b8;
+      font-weight: 400;
+    }
+
+    /* Style standard Date/Time inputs to look nice and show natively when clicked */
+    .city-input-inner input[type="date"],
+    .city-input-inner input[type="time"] {
+      cursor: pointer;
+      position: relative;
+    }
+
+    .city-input-inner input[type="date"]::-webkit-calendar-picker-indicator,
+    .city-input-inner input[type="time"]::-webkit-calendar-picker-indicator {
+      background: transparent;
+      bottom: 0;
+      color: transparent;
+      cursor: pointer;
+      height: auto;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: auto;
+      z-index: 5;
+    }
+
+    .city-swap-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 52px;
+      align-self: end;
+      border-right: none;
+      padding: 0;
+    }
+
+    .city-swap-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .city-swap-btn:hover {
+      background: #f1f5f9;
+      color: #0043DC;
+    }
+
+    .city-search-col {
+      padding-left: 0;
+    }
+
+    .city-search-btn {
+      background: #0043DC;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      height: 52px;
+      padding: 0 36px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 16px rgba(0, 82, 255, 0.25);
+    }
+
+    .city-search-btn:hover {
+      background: #0040c7;
+      box-shadow: 0 6px 20px rgba(0, 82, 255, 0.4);
+      transform: translateY(-1px);
+    }
+
+    /* --- Trust Bar --- */
+    .city-trust-bar {
+      position: relative;
+      z-index: 2;
+      background: #000;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+    }
+
+    .city-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.03em;
+    }
+
+    .city-trust-dot {
+      width: 4px;
+      height: 4px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+    }
+
+    /* --- City Info Section --- */
+    .city-info-section {
+      background: #fff;
+      color: #0f172a;
+      padding: 80px 40px;
+    }
+
+    .city-info-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .city-info-header {
+      margin-bottom: 48px;
+    }
+
+    .city-info-tag {
+      display: inline-block;
+      background: rgba(0, 82, 255, 0.08);
+      color: #0043DC;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 50px;
+      margin-bottom: 14px;
+    }
+
+    .city-info-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #0f172a;
+      line-height: 1.15;
+    }
+
+    .city-info-title span {
+      color: #0043DC;
+    }
+
+    .city-routes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 36px;
+    }
+
+    .city-route-card {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .city-route-card:hover {
+      border-color: #0043DC;
+      background: rgba(0, 82, 255, 0.03);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 82, 255, 0.1);
+    }
+
+    .city-route-from-to {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .city-route-city {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .city-route-arrow {
+      color: #0043DC;
+      font-size: 1.1rem;
+    }
+
+    .city-route-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .city-route-dist {
+      font-size: 0.78rem;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .city-route-price {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #0043DC;
+    }
+
+    /* --- Stats Strip --- */
+    .city-stats-strip {
+      background: linear-gradient(135deg, #0043DC 0%, #7c3aed 100%);
+      padding: 56px 40px;
+    }
+
+    .city-stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+
+    .city-stat-num {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.03em;
+    }
+
+    .city-stat-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .city-nav {
+        padding: 12px 20px;
+      }
+      .city-booking-card {
+        padding: 20px;
+      }
+      .city-form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .city-input-group {
+        padding: 0;
+        border: none;
+      }
+      .city-swap-col { display: none; }
+      .city-search-col { padding-left: 0; }
+      .city-search-btn { width: 100%; }
+      .city-trust-bar { flex-wrap: wrap; gap: 20px; padding: 16px 20px; }
+      .city-stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .city-info-section { padding: 48px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <!-- HEADER / NAVIGATION (same as home page) -->
+  <header class="header" id="header">
+    <script>
+      (function() {
+        var handleScroll = function() {
+          var hdr = document.getElementById("header");
+          var b2t = document.getElementById("backToTop");
+          var pos = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+          if (pos > 50) {
+            if (hdr) hdr.classList.add("sticky");
+            if (b2t) b2t.classList.add("active");
+          } else {
+            if (hdr) hdr.classList.remove("sticky");
+            if (b2t) b2t.classList.remove("active");
+          }
+        };
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        document.addEventListener("scroll", handleScroll, { passive: true });
+        document.addEventListener("DOMContentLoaded", handleScroll);
+        // Force an immediate check just in case it is mid-page
+        handleScroll();
+      })();
+    </script>
+
+    <div class="container">
+      <div class="city-logo-group">
+        <a href="index.html" class="logo" id="logoLink">
+          <img src="images/logo-v2.png" alt="pick MI Logo" class="logo-img">
+        </a>
+        <span class="city-logo-sep">|</span>
+        <span class="city-logo-name" id="navCityName">City</span>
+      </div>
+
+      <nav class="nav-menu" id="navMenu">
+        <div class="country-selector" id="countrySelector">
+          <img src="https://flagcdn.com/w20/in.png" alt="India Flag" class="flag-icon">
+          <span class="country-code">IN</span>
+        </div>
+
+        <span class="nav-separator"></span>
+
+        <a href="driver.html" class="nav-link">Drive Partner</a>
+        <a href="community.html" class="nav-link">Community</a>
+        <a href="help.html" class="nav-link">Help</a>
+
+        <span class="nav-separator"></span>
+
+        <a href="#" class="account-nav-link" id="accountBtn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="account-avatar-svg">
+            <circle cx="12" cy="12" r="12" fill="#94a3b8" />
+            <circle cx="12" cy="9" r="4.5" fill="#ffffff" />
+            <path d="M12 15c-4 0-7.5 2-7.5 4.8v1.2h15v-1.2c0-2.8-3.5-4.8-7.5-4.8z" fill="#ffffff" />
+          </svg>
+          <span>Account</span>
+        </a>
+      </nav>
+
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="city-hero" id="cityHero">
+    <div class="city-hero-bg" id="cityHeroBg"></div>
+    <div class="city-hero-overlay"></div>
+
+    <div class="city-hero-content">
+      <h1 class="city-hero-title" id="heroTitle">City</h1>
+      <p class="city-hero-tagline">The Gold Standard of Rides</p>
+    </div>
+
+    <div class="city-booking-wrap">
+      <div class="city-booking-card">
+
+        <!-- Tabs -->
+        <div class="city-booking-tabs">
+          <button class="city-tab active" data-tab="incity">Incity</button>
+          <button class="city-tab" data-tab="intercity">Intercity</button>
+          <button class="city-tab" data-tab="roundtrip">Round Trip</button>
+          <button class="city-tab" data-tab="airport">Airport</button>
+          <button class="city-tab" data-tab="rental">Rental</button>
+        </div>
+
+        <!-- Form -->
+        <div class="city-form-grid">
+          <div class="city-input-group">
+            <label>Form City</label>
+            <div class="city-input-inner">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="city-field-icon">
+                <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+              </svg>
+              <input type="text" id="fromInput" placeholder="Departure City" autocomplete="off">
+            </div>
+            <div class="autocomplete-suggestions" id="fromSuggestions"></div>
+          </div>
+
+          <div class="city-swap-col">
+            <button class="city-swap-btn" id="citySwapBtn" title="Swap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 3 21 7 17 11"/>
+                <path d="M3 7H21"/>
+                <path d="M7 21 3 17 7 13"/>
+                <path d="M21 17H3"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="city-input-group">
+            <label>To City</label>
+            <div class="city-input-inner">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="city-field-icon">
+                <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+              </svg>
+              <input type="text" id="toInput" placeholder="Destination City" autocomplete="off">
+            </div>
+            <div class="autocomplete-suggestions" id="toSuggestions"></div>
+          </div>
+
+          <div class="city-input-group">
+            <label>Date</label>
+            <div class="city-input-inner">
+              <input type="date" id="dateInput">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="city-field-icon right-icon">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="city-input-group">
+            <label>Time</label>
+            <div class="city-input-inner">
+              <input type="time" id="timeInput" value="10:00">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="city-field-icon right-icon">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="city-search-col">
+            <button class="city-search-btn" id="citySearchBtn">Search</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ROUTES SECTION -->
+  <section class="city-info-section">
+    <div class="city-info-inner">
+      <div class="city-info-header">
+        <div class="city-info-tag" id="routesTag">Popular Routes</div>
+        <h2 class="city-info-title">Cabs from <span id="routesCityName">City</span> to Top Destinations</h2>
+      </div>
+      <div class="city-routes-grid" id="routesGrid"></div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <section class="city-stats-strip">
+    <div class="city-stats-inner">
+      <div>
+        <div class="city-stat-num">83M+</div>
+        <div class="city-stat-label">Happy Passengers</div>
+      </div>
+      <div>
+        <div class="city-stat-num">₹9</div>
+        <div class="city-stat-label">Starting Per KM</div>
+      </div>
+      <div>
+        <div class="city-stat-num">24/7</div>
+        <div class="city-stat-label">Support Available</div>
+      </div>
+      <div>
+        <div class="city-stat-num">500+</div>
+        <div class="city-stat-label">Cities Covered</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHATBOT (injected via shared script) -->
+  <script>
+    // =========================================
+    // CITY DATA
+    // =========================================
+    const CITIES = {
+      chennai: {
+        display: 'Chennai',
+        image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1600&auto=format&fit=crop&q=80',
+        routes: [
+          { to: 'Bangalore', dist: '346 km', price: 'from ₹2,800' },
+          { to: 'Coimbatore', dist: '500 km', price: 'from ₹4,200' },
+          { to: 'Madurai', dist: '462 km', price: 'from ₹3,900' },
+          { to: 'Hyderabad', dist: '627 km', price: 'from ₹5,500' },
+          { to: 'Pondicherry', dist: '162 km', price: 'from ₹1,400' },
+          { to: 'Tirupati', dist: '138 km', price: 'from ₹1,200' },
+        ]
+      },
+      bangalore: {
+        display: 'Bangalore',
+        image: 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=1600&auto=format&fit=crop&q=80',
+        routes: [
+          { to: 'Chennai', dist: '346 km', price: 'from ₹2,800' },
+          { to: 'Hyderabad', dist: '569 km', price: 'from ₹4,800' },
+          { to: 'Coimbatore', dist: '362 km', price: 'from ₹3,100' },
+          { to: 'Mumbai', dist: '981 km', price: 'from ₹8,500' },
+          { to: 'Goa', dist: '560 km', price: 'from ₹4,700' },
+          { to: 'Mysore', dist: '145 km', price: 'from ₹1,200' },
+        ]
+      },
+      hyderabad: {
+        display: 'Hyderabad',
+        image: 'https://images.unsplash.com/photo-1605007493699-af65834f8a00?w=1600&auto=format&fit=crop&q=80',
+        routes: [
+          { to: 'Bangalore', dist: '569 km', price: 'from ₹4,800' },
+          { to: 'Chennai', dist: '627 km', price: 'from ₹5,500' },
+          { to: 'Mumbai', dist: '711 km', price: 'from ₹6,200' },
+          { to: 'Pune', dist: '559 km', price: 'from ₹4,700' },
+          { to: 'Vijayawada', dist: '275 km', price: 'from ₹2,300' },
+          { to: 'Warangal', dist: '148 km', price: 'from ₹1,250' },
+        ]
+      },
+      pune: {
+        display: 'Pune',
+        image: 'https://images.unsplash.com/photo-1601999109332-542b18dbec57?w=1600&auto=format&fit=crop&q=80',
+        routes: [
+          { to: 'Mumbai', dist: '149 km', price: 'from ₹1,300' },
+          { to: 'Goa', dist: '453 km', price: 'from ₹3,800' },
+          { to: 'Bangalore', dist: '841 km', price: 'from ₹7,200' },
+          { to: 'Nagpur', dist: '704 km', price: 'from ₹6,100' },
+          { to: 'Hyderabad', dist: '559 km', price: 'from ₹4,700' },
+          { to: 'Kolhapur', dist: '228 km', price: 'from ₹1,900' },
+        ]
+      },
+      delhi: {
+        display: 'Delhi',
+        image: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=1600&auto=format&fit=crop&q=80',
+        routes: [
+          { to: 'Jaipur', dist: '281 km', price: 'from ₹2,400' },
+          { to: 'Agra', dist: '233 km', price: 'from ₹2,000' },
+          { to: 'Dehradun', dist: '302 km', price: 'from ₹2,600' },
+          { to: 'Chandigarh', dist: '248 km', price: 'from ₹2,100' },
+          { to: 'Manali', dist: '571 km', price: 'from ₹4,900' },
+          { to: 'Lucknow', dist: '555 km', price: 'from ₹4,700' },
+        ]
+      },
+      mumbai: {
+        display: 'Mumbai',
+        image: 'https://images.unsplash.com/photo-1562979314-bee7453e911c?w=1600&auto=format&fit=crop&q=80',
+        routes: [
+          { to: 'Pune', dist: '149 km', price: 'from ₹1,300' },
+          { to: 'Goa', dist: '585 km', price: 'from ₹5,000' },
+          { to: 'Nashik', dist: '167 km', price: 'from ₹1,400' },
+          { to: 'Ahmedabad', dist: '524 km', price: 'from ₹4,500' },
+          { to: 'Bangalore', dist: '981 km', price: 'from ₹8,500' },
+          { to: 'Shirdi', dist: '241 km', price: 'from ₹2,000' },
+        ]
+      },
+      goa: {
+        display: 'Goa',
+        image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&auto=format&fit=crop&q=80',
+        routes: [
+          { to: 'Mumbai', dist: '585 km', price: 'from ₹5,000' },
+          { to: 'Bangalore', dist: '560 km', price: 'from ₹4,700' },
+          { to: 'Pune', dist: '453 km', price: 'from ₹3,800' },
+          { to: 'Hubli', dist: '174 km', price: 'from ₹1,500' },
+          { to: 'Kolhapur', dist: '229 km', price: 'from ₹1,900' },
+          { to: 'Mangalore', dist: '325 km', price: 'from ₹2,800' },
+        ]
+      },
+      kolkata: {
+        display: 'Kolkata',
+        image: 'https://images.unsplash.com/photo-1558431382-27e303142255?w=1600&auto=format&fit=crop&q=80',
+        routes: [
+          { to: 'Bhubaneswar', dist: '442 km', price: 'from ₹3,800' },
+          { to: 'Darjeeling', dist: '626 km', price: 'from ₹5,400' },
+          { to: 'Siliguri', dist: '592 km', price: 'from ₹5,100' },
+          { to: 'Digha', dist: '188 km', price: 'from ₹1,600' },
+          { to: 'Durgapur', dist: '164 km', price: 'from ₹1,400' },
+          { to: 'Shantiniketan', dist: '156 km', price: 'from ₹1,350' },
+        ]
+      },
+      ahmedabad: {
+        display: 'Ahmedabad',
+        image: 'https://images.unsplash.com/photo-1599030849662-c51a1c75a1f4?w=1600&auto=format&fit=crop&q=80',
+        routes: [
+          { to: 'Surat', dist: '265 km', price: 'from ₹2,200' },
+          { to: 'Mumbai', dist: '524 km', price: 'from ₹4,500' },
+          { to: 'Udaipur', dist: '261 km', price: 'from ₹2,200' },
+          { to: 'Jaipur', dist: '658 km', price: 'from ₹5,700' },
+          { to: 'Vadodara', dist: '111 km', price: 'from ₹950' },
+          { to: 'Rann of Kutch', dist: '330 km', price: 'from ₹2,800' },
+        ]
+      },
+      jaipur: {
+        display: 'Jaipur',
+        image: 'https://images.unsplash.com/photo-1477587458883-47145ed94245?w=1600&auto=format&fit=crop&q=80',
+        routes: [
+          { to: 'Delhi', dist: '281 km', price: 'from ₹2,400' },
+          { to: 'Agra', dist: '232 km', price: 'from ₹2,000' },
+          { to: 'Jodhpur', dist: '341 km', price: 'from ₹2,900' },
+          { to: 'Udaipur', dist: '421 km', price: 'from ₹3,600' },
+          { to: 'Ajmer', dist: '132 km', price: 'from ₹1,100' },
+          { to: 'Pushkar', dist: '147 km', price: 'from ₹1,250' },
+        ]
+      },
+    };
+
+    // =========================================
+    // GET CITY FROM URL
+    // =========================================
+    function getCityFromURL() {
+      // Support ?city=chennai or filename like chennai.html
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('city')) return params.get('city').toLowerCase();
+      
+      // Read from path (e.g. /chennai.html -> chennai)
+      const path = window.location.pathname;
+      const filename = path.split('/').pop().replace('.html', '').toLowerCase();
+      if (filename && filename !== 'city' && CITIES[filename]) return filename;
+      
+      return null;
+    }
+
+    // =========================================
+    // RENDER CITY PAGE
+    // =========================================
+    function renderCity(key) {
+      const city = CITIES[key];
+      if (!city) {
+        document.getElementById('heroTitle').textContent = '404 – City Not Found';
+        return;
+      }
+
+      // Update meta
+      document.title = `${city.display} Cabs — Pickmi`;
+      document.querySelector('meta[name="description"]').setAttribute('content',
+        `Book premium cabs in ${city.display} with Pickmi. Budget-friendly, safe, and on-time rides.`
+      );
+
+      // Nav
+      document.getElementById('navCityName').textContent = city.display;
+
+      // Hero
+      document.getElementById('heroTitle').textContent = city.display;
+      document.getElementById('cityHeroBg').style.backgroundImage = `url('${city.image}')`;
+
+      // Form defaults
+      document.getElementById('fromInput').value = city.display;
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('dateInput').value = today;
+
+      // Routes tag & title
+      document.getElementById('routesCityName').textContent = city.display;
+
+      // Routes grid
+      const grid = document.getElementById('routesGrid');
+      city.routes.forEach(route => {
+        const card = document.createElement('div');
+        card.className = 'city-route-card';
+        card.innerHTML = `
+          <div class="city-route-from-to">
+            <span class="city-route-city">${city.display}</span>
+            <span class="city-route-arrow">→</span>
+            <span class="city-route-city">${route.to}</span>
+          </div>
+          <div class="city-route-meta">
+            <span class="city-route-dist">📍 ${route.dist}</span>
+            <span class="city-route-price">${route.price}</span>
+          </div>
+        `;
+        card.addEventListener('click', () => {
+          document.getElementById('toInput').value = route.to;
+          autoDetectTripType();
+          document.getElementById('cityHero').scrollIntoView({ behavior: 'smooth' });
+        });
+        grid.appendChild(card);
+      });
+    }
+
+    // =========================================
+    // TAB SWITCHING
+    // =========================================
+    document.querySelectorAll('.city-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.city-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+
+    // Helper to extract city base word to check if they are in the same city
+    function getCityBase(val) {
+      if (!val) return '';
+      let clean = val.replace(/,\s*(karnataka|maharashtra|telangana|tamil nadu|delhi|gujarat|west bengal|rajasthan|uttar pradesh|goa|kerala|punjab|assam|chhattisgarh|jharkhand|odisha|uttarakhand|bihar|india)\s*/gi, '');
+      clean = clean.replace(/,\s*india/gi, '');
+      const parts = clean.split(',');
+      if (parts.length > 0) {
+        return parts[parts.length - 1].trim().toLowerCase();
+      }
+      return clean.trim().toLowerCase();
+    }
+
+    // Automatic trip type detector
+    function autoDetectTripType() {
+      const fromVal = document.getElementById('fromInput').value.trim().toLowerCase();
+      const toVal = document.getElementById('toInput').value.trim().toLowerCase();
+      
+      if (!fromVal || !toVal) return;
+      
+      const selectTab = (tabName) => {
+        const tabBtn = document.querySelector(`.city-tab[data-tab="${tabName}"]`);
+        if (tabBtn && !tabBtn.classList.contains('active')) {
+          document.querySelectorAll('.city-tab').forEach(t => t.classList.remove('active'));
+          tabBtn.classList.add('active');
+        }
+      };
+
+      // Rule C: If From or To contains "airport", switch to Airport
+      if (fromVal.includes('airport') || toVal.includes('airport') || fromVal.includes('aiprot') || toVal.includes('aiprot')) {
+        selectTab('airport');
+        return;
+      }
+      
+      const fromCity = getCityBase(fromVal);
+      const toCity = getCityBase(toVal);
+      
+      // Rule A: If From and To cities are the same, select Incity
+      if (fromCity === toCity || fromVal.includes(toCity) || toVal.includes(fromCity)) {
+        selectTab('incity');
+      } else {
+        // Rule B: If From and To are different, auto-switch to Intercity!
+        // (Only auto-switch if currently in incity or airport, to preserve manual selection of roundtrip/rental)
+        const activeTab = document.querySelector('.city-tab.active');
+        if (activeTab) {
+          const activeType = activeTab.getAttribute('data-tab');
+          if (activeType === 'incity' || activeType === 'airport') {
+            selectTab('intercity');
+          }
+        }
+      }
+    }
+
+    // Bind event listeners to input elements to auto-detect trip type
+    document.getElementById('fromInput').addEventListener('input', autoDetectTripType);
+    document.getElementById('toInput').addEventListener('input', autoDetectTripType);
+    document.getElementById('fromInput').addEventListener('change', autoDetectTripType);
+    document.getElementById('toInput').addEventListener('change', autoDetectTripType);
+
+    // =========================================
+    // AUTOCOMPLETE CITY SUGGESTIONS
+    // =========================================
+    const popularCities = [
+      { city: "Bangalore", state: "Karnataka, India" },
+      { city: "Chennai", state: "Tamil Nadu, India" },
+      { city: "Mumbai", state: "Maharashtra, India" },
+      { city: "Delhi", state: "Delhi, India" },
+      { city: "Hyderabad", state: "Telangana, India" },
+      { city: "Pune", state: "Maharashtra, India" },
+      { city: "Kolkata", state: "West Bengal, India" },
+      { city: "Jaipur", state: "Rajasthan, India" },
+      { city: "Goa", state: "Goa, India" }
+    ];
+
+    function setupAutocomplete(inputElement, suggestionsElement) {
+      inputElement.addEventListener('focus', () => {
+        renderSuggestions(inputElement.value);
+      });
+
+      inputElement.addEventListener('input', () => {
+        renderSuggestions(inputElement.value);
+      });
+
+      let debounceTimer;
+
+      function displaySuggestionsList(list) {
+        suggestionsElement.innerHTML = '';
+        if (list.length === 0) {
+          suggestionsElement.style.display = 'none';
+          return;
+        }
+
+        list.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'suggestion-item';
+          div.innerHTML = `
+            <span class="suggestion-city">${item.city}</span>
+            <span class="suggestion-state">${item.state}</span>
+          `;
+          
+          div.addEventListener('click', () => {
+            inputElement.value = item.city;
+            suggestionsElement.style.display = 'none';
+            autoDetectTripType();
+          });
+
+          suggestionsElement.appendChild(div);
+        });
+
+        suggestionsElement.style.display = 'block';
+      }
+
+      function renderSuggestions(query) {
+        const filterQuery = query.toLowerCase().trim();
+        
+        const localMatches = popularCities.filter(item => 
+          item.city.toLowerCase().includes(filterQuery) || 
+          item.state.toLowerCase().includes(filterQuery)
+        );
+
+        displaySuggestionsList(localMatches);
+
+        if (filterQuery.length >= 3) {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(() => {
+            fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=5&addressdetails=1&countrycodes=in&accept-language=en`)
+              .then(res => res.json())
+              .then(results => {
+                if (results && results.length > 0) {
+                  const apiMatches = results.map(res => {
+                    const addr = res.address;
+                    const cityName = res.name;
+                    const parentCity = addr.city || addr.town || addr.municipality || addr.suburb || "";
+                    const displayCity = (parentCity && parentCity.toLowerCase() !== cityName.toLowerCase()) 
+                      ? `${cityName}, ${parentCity}` 
+                      : cityName;
+                    const stateName = addr.state || addr.state_district || addr.county || "India";
+                    
+                    return {
+                      city: displayCity,
+                      state: stateName.endsWith(", India") ? stateName : `${stateName}, India`
+                    };
+                  });
+
+                  const combined = [...localMatches];
+                  apiMatches.forEach(apiItem => {
+                    if (!combined.some(c => c.city.toLowerCase() === apiItem.city.toLowerCase())) {
+                      combined.push(apiItem);
+                    }
+                  });
+
+                  displaySuggestionsList(combined);
+                }
+              })
+              .catch(err => {
+                console.error("Nominatim dynamic search failed:", err);
+              });
+          }, 250);
+        }
+      }
+
+      document.addEventListener('click', (e) => {
+        if (e.target !== inputElement && !suggestionsElement.contains(e.target)) {
+          suggestionsElement.style.display = 'none';
+        }
+      });
+
+      // Update state/type on blur for manual text input
+      inputElement.addEventListener('blur', () => {
+        setTimeout(() => {
+          const val = inputElement.value.trim();
+          if (val === '') return;
+
+          const valLower = val.toLowerCase();
+          const match = popularCities.find(c => c.city.toLowerCase() === valLower);
+          if (match) {
+            autoDetectTripType();
+          } else {
+            fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(val)}&format=json&limit=1&addressdetails=1&countrycodes=in`)
+              .then(res => res.json())
+              .then(results => {
+                if (results && results.length > 0) {
+                  const addr = results[0].address;
+                  const cityName = results[0].name;
+                  const parentCity = addr.city || addr.town || addr.municipality || addr.suburb || "";
+                  const displayCity = (parentCity && parentCity.toLowerCase() !== cityName.toLowerCase()) 
+                    ? `${cityName}, ${parentCity}` 
+                    : cityName;
+                  
+                  inputElement.value = displayCity;
+                  autoDetectTripType();
+                }
+              })
+              .catch(err => {
+                console.error("Nominatim search validation failed:", err);
+              });
+          }
+        }, 250);
+      });
+    }
+
+    setupAutocomplete(document.getElementById('fromInput'), document.getElementById('fromSuggestions'));
+    setupAutocomplete(document.getElementById('toInput'), document.getElementById('toSuggestions'));
+
+
+    // =========================================
+    // SWAP BUTTON
+    // =========================================
+    document.getElementById('citySwapBtn').addEventListener('click', () => {
+      const from = document.getElementById('fromInput');
+      const to = document.getElementById('toInput');
+      [from.value, to.value] = [to.value, from.value];
+      autoDetectTripType();
+    });
+
+    // =========================================
+    // SEARCH
+    // =========================================
+    document.getElementById('citySearchBtn').addEventListener('click', () => {
+      const from = document.getElementById('fromInput').value.trim();
+      const to = document.getElementById('toInput').value.trim();
+      if (!to) {
+        document.getElementById('toInput').focus();
+        return;
+      }
+      const activeTab = document.querySelector('.city-tab.active');
+      const tabType = activeTab ? activeTab.getAttribute('data-tab') : 'incity';
+      window.location.href = `index.html?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&date=${document.getElementById('dateInput').value}&time=${document.getElementById('timeInput').value}&type=${tabType}`;
+    });
+
+    // =========================================
+    // INIT & AUTH MODAL SYSTEM
+    // =========================================
+    document.addEventListener('DOMContentLoaded', () => {
+      const key = getCityFromURL();
+      if (key) {
+        renderCity(key);
+      } else {
+        renderCity('bangalore');
+      }
+      // ─── STICKY NAVBAR & MOBILE MENU CORE CONTROLLER ───
+      const header = document.getElementById('header');
+      if (header) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 50) {
+            header.classList.add('sticky');
+          } else {
+            header.classList.remove('sticky');
+          }
+        });
+      }
+
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
+      if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+          hamburger.classList.toggle('active');
+          navMenu.classList.toggle('active');
+        });
+      }
+
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (hamburger) hamburger.classList.remove('active');
+          if (navMenu) navMenu.classList.remove('active');
+        });
+      });
+
+    });
+  </script>
+
+
+
+  <script src="app.js?v=200"></script>
+  <!-- SPLIT-SCREEN LOGIN MODAL -->
+  <div class="login-modal-overlay" id="splitLoginModalOverlay">
+    <div class="login-modal" id="splitLoginModal">
+      <button class="login-modal-close" id="splitLoginModalClose">&times;</button>
+      <div class="login-modal-left" style="background-image: url('images/hero-bg.jpg');">
+      </div>
+      <div class="login-modal-right">
+        
+        <!-- STEP 1: MOBILE NUMBER ENTRY -->
+        <div id="authStepMobile" class="auth-step">
+          <h2 class="login-title" id="authModalTitle">Welcome to Pickmi</h2>
+          <p class="login-subtitle">Sign in or create an account to manage your rides and preferences.</p>
+          
+          <form class="login-form" id="formStepMobile">
+            <div class="phone-input-group">
+              <div class="phone-flag">
+                <img src="https://flagcdn.com/w20/in.png" alt="IN">
+              </div>
+              <input type="tel" id="authMobileInput" placeholder="Enter Mobile Number" class="login-input phone-input" pattern="[0-9]{10}" maxlength="10" required>
+            </div>
+            
+            <button type="submit" class="login-submit-btn" id="btnSendOtp">Continue</button>
+          </form>
+          
+          <p class="login-footer-text">By continuing you agree with the <a href="#">terms and conditions</a> of Pickmi</p>
+        </div>
+
+        <!-- STEP 2: OTP VERIFICATION -->
+        <div id="authStepOtp" class="auth-step" style="display: none;">
+          <h2 class="login-title">Verify OTP</h2>
+          <p class="login-subtitle" id="otpSubText">Enter the 4-digit OTP sent to your mobile number.</p>
+          
+          <form class="login-form" id="formStepOtp">
+            <input type="text" id="authOtpInput" placeholder="Enter 6-digit OTP" class="login-input" maxlength="6" pattern="[0-9]{4}" style="text-align: center; letter-spacing: 6px; font-size: 1.2rem; font-weight: 700;" required>
+            
+            <button type="submit" class="login-submit-btn" id="btnVerifyOtp">Verify OTP</button>
+          </form>
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; font-size: 0.85rem;">
+            <button type="button" id="btnBackToMobile" style="background: none; border: none; color: #0043DC; cursor: pointer; font-weight: 600;">← Change Number</button>
+            <button type="button" id="btnResendOtp" style="background: none; border: none; color: #64748b; cursor: pointer;">Resend OTP</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: NEW USER REGISTRATION -->
+        <div id="authStepRegister" class="auth-step" style="display: none;">
+          <h2 class="login-title">Create Account</h2>
+          <p class="login-subtitle">Looks like you're new here! Fill in your details to create an account.</p>
+          
+          <form class="login-form" id="formStepRegister">
+            <input type="text" id="authNameInput" placeholder="Full Name" class="login-input" required>
+            <input type="email" id="authEmailInput" placeholder="Email Address" class="login-input" required>
+            
+            <select id="authGenderSelect" class="login-input login-select" required>
+              <option value="" disabled selected>Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            
+            <button type="submit" class="login-submit-btn" id="btnCompleteRegister">Create Account &amp; Login</button>
+          </form>
+        </div>
+
+        <!-- STEP 4: LOGGED IN USER PROFILE -->
+        <div id="authStepLoggedIn" class="auth-step" style="display: none;">
+          <h2 class="login-title">My Account</h2>
+          <p class="login-subtitle">You are currently logged in to Pickmi.</p>
+          
+          <div style="background: #f8fafc; border-radius: 12px; padding: 18px; margin: 18px 0; border: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 8px;">
+            <div style="font-weight: 700; font-size: 1.15rem; color: #0f172a;" id="loggedInName">User</div>
+            <div style="color: #64748b; font-size: 0.9rem;" id="loggedInEmail">email@domain.com</div>
+            <div style="color: #0043DC; font-size: 0.9rem; font-weight: 600;" id="loggedInMobile">+91 9876543210</div>
+          </div>
+          
+          <button type="button" class="login-submit-btn" id="btnLogout" style="background-color: #ef4444;">Log Out</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- Supabase JS Client Integration -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+</body>
+</html>

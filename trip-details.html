@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Trip - Pickmi</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=300">
+  <style>
+    body {
+      background-color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #0f172a;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      z-index: 10000 !important;
+      background: #ffffff !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+      padding: 14px 0 !important;
+    }
+    .trip-page-container {
+      max-width: 1180px;
+      margin: 110px auto 100px;
+      padding: 0 32px;
+    }
+    .back-link-btn {
+      background: none;
+      border: none;
+      font-size: 15px;
+      font-weight: 700;
+      color: #000000;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      padding: 0;
+      text-decoration: none;
+      font-family: inherit;
+    }
+    .back-link-btn:hover {
+      opacity: 0.8;
+    }
+
+    /* Split 2-Column Layout: Fixed Map Left, Scrollable Details Right */
+    .trip-split-layout {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* Fixed Sticky Left Column */
+    .trip-left-column {
+      position: sticky;
+      top: 90px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .trip-map-container {
+      width: 100%;
+      height: 440px;
+      background: #ebf1f6;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Scrollable Right Column */
+    .trip-right-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .trip-main-title {
+      font-size: 36px;
+      font-weight: 600;
+      color: #000000;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .trip-meta-subtitle {
+      font-size: 16px;
+      font-weight: 500;
+      color: #0f172a;
+      margin-bottom: 28px;
+    }
+
+    .section-heading {
+      font-size: 20px;
+      font-weight: 600;
+      color: #000000;
+      margin-bottom: 16px;
+    }
+    .rating-stars {
+      display: flex;
+      gap: 6px;
+      font-size: 26px;
+      color: #000000;
+      margin-bottom: 12px;
+    }
+    .section-divider {
+      border: none;
+      border-top: 1px solid #f1f5f9;
+      margin: 32px 0;
+    }
+    .details-row-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .detail-row-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    .action-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .action-pill-btn {
+      background: #f1f5f9;
+      border: none;
+      border-radius: 9999px;
+      padding: 12px 22px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s ease;
+      font-family: inherit;
+    }
+    .action-pill-btn:hover {
+      background: #e2e8f0;
+    }
+    .route-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      position: relative;
+      padding-left: 32px;
+    }
+    .timeline-line {
+      position: absolute;
+      left: 7px;
+      top: 14px;
+      bottom: 36px;
+      width: 2px;
+      background: #000000;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -32px;
+      top: 3px;
+      width: 16px;
+      height: 16px;
+      background: #000000;
+      border-radius: 50%;
+    }
+    .timeline-square {
+      position: absolute;
+      left: -32px;
+      top: 3px;
+      width: 16px;
+      height: 16px;
+      background: #000000;
+      border-radius: 3px;
+    }
+    .timeline-address {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: #000000;
+      line-height: 1.45;
+      margin-bottom: 4px;
+    }
+    .timeline-time {
+      font-size: 13.5px;
+      color: #64748b;
+      font-weight: 500;
+    }
+    .get-help-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .get-help-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .help-icon-circle {
+      width: 44px;
+      height: 44px;
+      background: #f1f5f9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 900px) {
+      .trip-split-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .trip-left-column {
+        position: static;
+      }
+      .trip-map-container {
+        height: 280px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header header-light" id="header">
+    <div class="container">
+      <a href="index.html" class="logo" id="logoLink">
+        <img src="images/logo-v2.png" alt="pick MI Logo" class="logo-img">
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <div class="country-selector" id="countrySelector">
+          <img src="https://flagcdn.com/w20/in.png" alt="India Flag" class="flag-icon">
+          <span class="country-code">IN</span>
+        </div>
+        
+        <span class="nav-separator"></span>
+        
+        <a href="driver.html" class="nav-link">Drive Partner</a>
+        <a href="community.html" class="nav-link">Community</a>
+        <a href="help.html" class="nav-link">Help</a>
+        
+        <span class="nav-separator"></span>
+        
+        <a href="account.html" class="account-nav-link" id="accountBtn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="account-avatar-svg">
+            <circle cx="12" cy="12" r="12" fill="#0043DC" />
+            <circle cx="12" cy="9" r="4.5" fill="#ffffff" />
+            <path d="M12 15c-4 0-7.5 2-7.5 4.8v1.2h15v-1.2c0-2.8-3.5-4.8-7.5-4.8z" fill="#ffffff" />
+          </svg>
+          <span id="navAccountName">Hi, Karthik</span>
+        </a>
+      </nav>
+
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN TRIP DETAIL SPLIT PAGE CONTAINER -->
+  <main class="trip-page-container">
+
+    <div class="trip-split-layout">
+      
+      <!-- LEFT COLUMN: Sticky Back Button & Fixed Route Map -->
+      <div class="trip-left-column">
+        <a href="account.html#activity" class="back-link-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back to trips
+        </a>
+
+        <!-- Fixed Left Map Graphic -->
+        <div class="trip-map-container">
+          <svg width="100%" height="100%" viewBox="0 0 460 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="460" height="440" fill="#ebf1f6"/>
+            <path d="M-20 120 C100 110, 140 180, 180 190 C230 200, 280 130, 350 140 C400 150, 440 220, 500 200 L500 460 L-20 460 Z" fill="#d0e1f9" opacity="0.6"/>
+            <path d="M280 40 Q330 90, 390 55 Q450 20, 500 65 Q430 110, 280 40 Z" fill="#d0e1f9" opacity="0.8"/>
+            <path d="M-50 320 L520 250" stroke="#ffffff" stroke-width="10"/>
+            <path d="M120 -20 L260 460" stroke="#ffffff" stroke-width="9"/>
+            <path d="M380 -20 L330 460" stroke="#ffffff" stroke-width="9"/>
+            <path d="M-20 140 L500 260" stroke="#ffffff" stroke-width="8"/>
+
+            <!-- Route Curve -->
+            <path d="M210 90 C220 145, 260 170, 260 220 C260 270, 290 310, 300 340" stroke="#06b6d4" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <!-- Highway Badges -->
+            <g transform="translate(225, 80)">
+              <rect x="0" y="0" width="26" height="20" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+              <text x="13" y="14" font-size="11" font-weight="bold" fill="#475569" text-anchor="middle">39</text>
+            </g>
+            <g transform="translate(275, 150)">
+              <rect x="0" y="0" width="28" height="20" rx="4" fill="#3b82f6"/>
+              <text x="14" y="14" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">47</text>
+            </g>
+
+            <!-- City Label -->
+            <text x="300" y="215" font-size="24" font-weight="800" fill="#334155" letter-spacing="-0.02em" text-anchor="middle">Bengaluru</text>
+
+            <!-- Pickup Pin (Red Dot) -->
+            <circle cx="210" cy="90" r="12" fill="#ef4444" stroke="#ffffff" stroke-width="4"/>
+            <!-- Drop Pin (Green Dot) -->
+            <circle cx="300" cy="340" r="12" fill="#10b981" stroke="#ffffff" stroke-width="4"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Scrollable Trip Details -->
+      <div class="trip-right-column">
+        <h1 class="trip-main-title">Your Trip</h1>
+        <p class="trip-meta-subtitle" id="tripMeta">9:02 AM, Thursday May 28 2026 with SACHIN</p>
+
+        <!-- Rating Section -->
+        <div>
+          <h3 class="section-heading">Trip rating</h3>
+          <div class="rating-stars">
+            ★ ★ ★ ★ ★
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Trip Details Section -->
+        <div>
+          <h3 class="section-heading">Trip details</h3>
+          
+          <div class="details-row-list">
+            <div class="detail-row-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2.2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+              <span id="tripDistance">28.25 kilometres</span>
+            </div>
+
+            <div class="detail-row-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span id="tripDuration">1 hours 2 minutes</span>
+            </div>
+
+            <div class="detail-row-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2.2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              <span id="tripFare">₹224.65</span>
+            </div>
+
+            <div class="detail-row-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2.2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              <span id="tripPayment">Cash</span>
+            </div>
+          </div>
+
+          <!-- Action Pills -->
+          <div class="action-pills-row">
+            <button class="action-pill-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              View Receipt
+            </button>
+            <button class="action-pill-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Resend Receipt
+            </button>
+            <button class="action-pill-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="13" y2="12"/></svg>
+              Request Invoice
+            </button>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Route Section -->
+        <div>
+          <h3 class="section-heading">Route</h3>
+          <div class="route-timeline">
+            <div class="timeline-line"></div>
+            <div>
+              <div class="timeline-dot"></div>
+              <div class="timeline-address" id="pickupAddress">7th Main Rd, Shakambari Nagar, 1st Phase, J. P. Nagar, Bengaluru, Karnataka 560078, India</div>
+              <div class="timeline-time" id="pickupTime">9:02 AM</div>
+            </div>
+            <div>
+              <div class="timeline-square"></div>
+              <div class="timeline-address" id="dropAddress">560073, 3rd Cross BMV Mayanna Layout Main, Mayanna Layout, Shrikantapura, Anchepalya, Madanayakanahalli, Karnataka 560073, India</div>
+              <div class="timeline-time" id="dropTime">10:04 AM</div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Get Help CTA -->
+        <a href="help.html" class="get-help-row">
+          <div class="get-help-left">
+            <div class="help-icon-circle">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2.2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+            </div>
+            <span style="font-size: 18px; font-weight: 700; color: #000000;">Get Help</span>
+          </div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="app.js?v=300"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Parse active trip data from sessionStorage
+      try {
+        const raw = sessionStorage.getItem('pickmi_selected_trip');
+        if (raw) {
+          const trip = JSON.parse(raw);
+          if (trip.meta) document.getElementById('tripMeta').textContent = trip.meta;
+          if (trip.distance) document.getElementById('tripDistance').textContent = trip.distance;
+          if (trip.duration) document.getElementById('tripDuration').textContent = trip.duration;
+          if (trip.price) document.getElementById('tripFare').textContent = trip.price;
+          if (trip.payment) document.getElementById('tripPayment').textContent = trip.payment;
+          if (trip.pickup) document.getElementById('pickupAddress').textContent = trip.pickup;
+          if (trip.pickupTime) document.getElementById('pickupTime').textContent = trip.pickupTime;
+          if (trip.drop) document.getElementById('dropAddress').textContent = trip.drop;
+          if (trip.dropTime) document.getElementById('dropTime').textContent = trip.dropTime;
+        }
+      } catch(e) {}
+    });
+  </script>
+  <!-- Supabase JS Client Integration -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+</body>
+</html>

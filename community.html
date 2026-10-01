@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Hub | Pickmi Travel & Driver Exchange Network</title>
+  <meta name="description" content="Connect, share trips, and find drivers instantly on the Pickmi community hub. Exchange trips, register travel agencies, and access outstation and airport routes.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="styles.css?v=200">
+
+  <style>
+    @keyframes headerFadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .header.sticky {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      z-index: 10000 !important;
+      background: #ffffff !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+      animation: headerFadeIn 0.3s ease-out forwards !important;
+    }
+  </style>
+
+</head>
+<body>
+
+  <!-- HEADER / NAVIGATION -->
+  <header class="header header-light" id="header">
+    <script>
+      (function() {
+        var handleScroll = function() {
+          var hdr = document.getElementById("header");
+          var b2t = document.getElementById("backToTop");
+          var pos = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+          if (pos > 50) {
+            if (hdr) hdr.classList.add("sticky");
+            if (b2t) b2t.classList.add("active");
+          } else {
+            if (hdr) hdr.classList.remove("sticky");
+            if (b2t) b2t.classList.remove("active");
+          }
+        };
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        document.addEventListener("scroll", handleScroll, { passive: true });
+        document.addEventListener("DOMContentLoaded", handleScroll);
+        // Force an immediate check just in case it is mid-page
+        handleScroll();
+      })();
+    </script>
+
+    <div class="container">
+      <a href="index.html" class="logo" id="logoLink">
+        <img src="images/logo-v2.png" alt="pick MI Logo" class="logo-img">
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <div class="country-selector" id="countrySelector">
+          <img src="https://flagcdn.com/w20/in.png" alt="India Flag" class="flag-icon">
+          <span class="country-code">IN</span>
+        </div>
+        
+        <span class="nav-separator"></span>
+        
+        <a href="driver.html" class="nav-link">Drive Partner</a>
+        <a href="community.html" class="nav-link active">Community</a>
+        <a href="help.html" class="nav-link">Help</a>
+        
+        <span class="nav-separator"></span>
+        
+        <a href="index.html#account" class="account-nav-link" id="accountBtn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="account-avatar-svg">
+            <circle cx="12" cy="12" r="12" fill="#94a3b8" />
+            <circle cx="12" cy="9" r="4.5" fill="#ffffff" />
+            <path d="M12 15c-4 0-7.5 2-7.5 4.8v1.2h15v-1.2c0-2.8-3.5-4.8-7.5-4.8z" fill="#ffffff" />
+          </svg>
+          <span>Account</span>
+        </a>
+      </nav>
+
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+    
+    <!-- COMMUNITY HERO SECTION -->
+    <section class="community-hero">
+      <div class="container">
+        <div class="community-hero-grid">
+          
+          <!-- Left Column -->
+          <div class="community-hero-content">
+            <span class="community-hero-subtitle">Connect. <span class="highlight">Share</span>. Drive Together.</span>
+            <h1 class="community-hero-title">Share trips and find cabs instantly.</h1>
+            <a href="#grow" class="community-hero-cta" id="joinCommunityBtn">
+              <span>Join the Community</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Right Column (Stacked Cards) -->
+          <div class="community-card-stack">
+            
+            <!-- Card 1 -->
+            <div class="community-hero-card">
+              <div class="community-hero-card-left">
+                <h3>Join the Network</h3>
+                <p>Register your travel agency and become part of the Pickmi network.</p>
+              </div>
+              <img src="images/join_network_icon.jpg" alt="Join Network" class="community-hero-card-img">
+            </div>
+
+            <!-- Card 2 -->
+            <div class="community-hero-card">
+              <div class="community-hero-card-left">
+                <h3>Publish Extra Trips</h3>
+                <p>Got an unassigned trip or need a driver? Post it in the community feed.</p>
+              </div>
+              <img src="images/publish_trips_icon.jpg" alt="Publish Extra Trips" class="community-hero-card-img">
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  <!-- GROW WITH PICKMI SECTION -->
+  <section class="grow-section" id="grow">
+    <div class="container">
+      <div class="grow-card">
+        <h2 class="grow-title">Grow with Pickmi</h2>
+        <div class="grow-grid">
+          
+          <!-- Item 1 -->
+          <div class="grow-item">
+            <div class="grow-indicator-bar"></div>
+            <h3>Real-Time Chat</h3>
+            <p>Communicate directly with other agencies.</p>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="grow-item">
+            <div class="grow-indicator-bar"></div>
+            <h3>Collaborate Easily</h3>
+            <p>Connect with nearby travel agencies.</p>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="grow-item">
+            <div class="grow-indicator-bar"></div>
+            <h3>Maximize Trips</h3>
+            <p>Turn idle vehicles into profit.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONNECTED ECOSYSTEM STATS SECTION -->
+  <section class="ecosystem-section">
+    <div class="container">
+      <div class="ecosystem-card">
+        <span class="ecosystem-subtitle">Grow together</span>
+        <h2 class="ecosystem-title">We’re building a connected travel ecosystem.</h2>
+        
+        <div class="ecosystem-stats-grid">
+          
+          <!-- Stat 1 -->
+          <div class="ecosystem-stat-item">
+            <span class="ecosystem-stat-num">500+</span>
+            <span class="ecosystem-stat-label">Registered Agencies</span>
+          </div>
+
+          <div class="ecosystem-divider"></div>
+
+          <!-- Stat 2 -->
+          <div class="ecosystem-stat-item">
+            <span class="ecosystem-stat-num">1,200+</span>
+            <span class="ecosystem-stat-label">Shared Trips</span>
+          </div>
+
+          <div class="ecosystem-divider"></div>
+
+          <!-- Stat 3 -->
+          <div class="ecosystem-stat-item">
+            <span class="ecosystem-stat-num">800+</span>
+            <span class="ecosystem-stat-label">Drivers Connected</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAY CONNECTED CTA SECTION -->
+  <section class="stay-connected-section">
+    <div class="container">
+      <div class="stay-connected-card">
+        <h2>Stay Connected with Fellow Travel Agencies</h2>
+        <p>Sign up and start driving with a fleet partner using the Pickmi collaborative community system to grow your bookings and expand routes.</p>
+        <a href="driver.html" class="stay-connected-cta">
+          <span>Join the Partner Network</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIRECTORY & SEO OFFERINGS SECTION (BEFORE FOOTER) -->
+    <section class="directory-seo-section" id="directorySeo">
+      <div class="container">
+        <div class="directory-seo-wrapper">
+          
+          <!-- Category 1 -->
+          <div class="directory-seo-block">
+            <h4 class="directory-seo-title">WHAT WE ARE OFFERING</h4>
+            <p class="directory-seo-text">
+              Taxi Booking, Cab Booking, Online Taxi Booking, Online Cab Booking, Book Taxi Online, Book Cab Online, Taxi Service, Cab Service, Taxi Near Me, Cab Near Me, Best Taxi Service, Best Cab Service, Affordable Taxi, Cheap Cab Booking, Reliable Taxi Service, Professional Cab Service, Trusted Taxi Service, Premium Cab Service, 24/7 Taxi Service, Instant Cab Booking, Drop Taxi, Drop Cab, One Way Taxi, One Way Cab, One Way Drop Taxi, Drop Only Taxi, Drop Only Cab, One Side Taxi, One Side Cab Fare, Pay for Drop Only, Half Fare Drop Taxi, No Return Fare Taxi, Oneway Drop Cab Booking
+            </p>
+          </div>
+
+          <!-- Category 2 -->
+          <div class="directory-seo-block">
+            <h4 class="directory-seo-title">OUTSTATION</h4>
+            <p class="directory-seo-text">
+              Outstation Taxi, Outstation Cab, Outstation Cab Booking, Outstation Taxi Booking, Intercity Taxi, Intercity Cab, Long Distance Taxi, Long Distance Cab, Interstate Taxi, One Way Outstation Cab, One Way Taxi, Round Trip Taxi, Round Trip Cab, Multi City Taxi, Multi Destination Cab, Family Trip Taxi, Weekend Trip Cab
+            </p>
+          </div>
+
+          <!-- Category 3 -->
+          <div class="directory-seo-block">
+            <h4 class="directory-seo-title">AIRPORT</h4>
+            <p class="directory-seo-text">
+              Airport Taxi, Airport Cab, Airport Transfer, Airport Pickup, Airport Drop, Airport Shuttle, Airport Transportation, Airport Taxi Booking, Airport Cab Booking, 24 Hour Airport Taxi, Airport Taxi Near Me, Airport Pickup Service, Airport Drop Service, Airport Chauffeur, Airport Ride
+            </p>
+          </div>
+
+          <!-- Category 4 -->
+          <div class="directory-seo-block">
+            <h4 class="directory-seo-title">LOCAL & SMART CITY TAXI — SERVING ACROSS INDIA'S SMART CITIES</h4>
+            <p class="directory-seo-text">
+              Local Taxi, Local Cab, Smart City Taxi, Smart City Cab, City Taxi, City Cab, Local Cab Booking, Hourly Taxi, Hourly Cab, Rental Taxi, Rental Cab, Full Day Cab, Half Day Cab, Daily Cab Rental, Local Travel Cab, Local Sightseeing Cab, Chennai, Coimbatore, Madurai, Tiruchirappalli, Salem, Tirunelveli, Tiruppur, Erode, Vellore, Thanjavur, Thoothukudi, Dindigul, Bengaluru, Mangaluru, Hubballi-Dharwad, Belagavi, Davanagere, Shivamogga, Tumakuru, Hyderabad, Warangal, Karimnagar, Visakhapatnam, Tirupati, Kakinada, Amaravati, Kochi, Thiruvananthapuram, Kozhikode, Mumbai, Pune, Nagpur, Nashik, Thane, Aurangabad, Kalyan-Dombivli, Solapur, Ahmedabad, Surat, Vadodara, Rajkot, Gandhinagar, Dahod, Delhi, New Delhi, NDMC, Jaipur, Udaipur, Kota, Ajmer, Bhopal, Indore, Jabalpur, Gwalior, Ujjain, Sagar, Satna, Lucknow, Kanpur, Varanasi, Agra, Prayagraj, Aligarh, Bareilly, Jhansi, Moradabad, Rampur, Saharanpur, Kolkata, New Town Kolkata, Bidhannagar, Durgapur, Haldia, Bhubaneswar, Rourkela, Patna, Bhagalpur, Muzaffarpur, Biharsharif, Ranchi, Chandigarh, Dehradun, Shimla, Jammu, Srinagar, Panaji, Puducherry, Port Blair, Silvassa, Kavaratti, Diu, Imphal, Agartala, Aizawl, Kohima, Itanagar, Shillong, Gangtok, Guwahati, Namchi, Pasighat
+            </p>
+          </div>
+
+          <!-- Category 5 -->
+          <div class="directory-seo-block">
+            <h4 class="directory-seo-title">TOURISM FOR BUSINESS & CORPORATE — EVERYWHERE WE SERVE</h4>
+            <p class="directory-seo-text">
+              Corporate Taxi, Corporate Cab, Employee Transportation, Business Travel Cab, Office Cab, Staff Transportation, Company Cab Service, Corporate Airport Transfer, Business Taxi Booking, Executive Taxi, Executive Cab, Hotel Taxi Service, Tourist Taxi, Tourist Cab, Holiday Cab, Vacation Taxi, Sightseeing Taxi, Hill Station Taxi, Pilgrimage Taxi, Temple Tour Taxi, Family Tour Cab, Group Travel Taxi, Weekend Getaway Cab, Travel Taxi Service
+            </p>
+          </div>
+
+          <!-- Category 6 -->
+          <div class="directory-seo-block">
+            <h4 class="directory-seo-title">VEHICLE</h4>
+            <p class="directory-seo-text">
+              Sedan Cab, SUV Cab, Hatchback Cab, Innova Taxi, Innova Crysta Taxi, Ertiga Taxi, Swift Dzire Taxi, Xcent Taxi, Etios Taxi, Tempo Traveller Rental, Luxury Taxi, Premium SUV Taxi, AC Taxi, Chauffeur Driven Car
+            </p>
+          </div>
+
+          <!-- Category 7 -->
+          <div class="directory-seo-block">
+            <h4 class="directory-seo-title">WHY CUSTOMERS PREFER US</h4>
+            <p class="directory-seo-text">
+              Best Rates Guarantee, No Hidden Charges, Professional Drivers, Clean & Hygienic Cabs, 24/7 Customer Support, Instant Booking Confirmation, Flexible Payment Options, On-time Pickup Guarantee
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      
+      <div class="footer-top">
+        
+        <div class="footer-brand">
+          <div class="footer-logo">pick<span>mi</span></div>
+          <p class="footer-desc">Premium outstation, airport, and local car rentals offering safety, visual transparency, and budget-friendly pricing.</p>
+          <div class="social-links">
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Twitter">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" /></svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#outstation" class="footer-link">Outstation One-Way</a></li>
+            <li><a href="index.html#outstation" class="footer-link">Outstation Round-Trip</a></li>
+            <li><a href="index.html#airport" class="footer-link">Airport Transfers</a></li>
+            <li><a href="index.html#rentals" class="footer-link">Hourly Rentals</a></li>
+            <li><a href="index.html#corporate" class="footer-link">Corporate Cabs</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Cities served</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#cities" class="footer-link">Bangalore Cabs</a></li>
+            <li><a href="index.html#cities" class="footer-link">Pune Cabs</a></li>
+            <li><a href="index.html#cities" class="footer-link">Mumbai Cabs</a></li>
+            <li><a href="index.html#cities" class="footer-link">Hyderabad Cabs</a></li>
+            <li><a href="index.html#cities" class="footer-link">Chennai Cabs</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="driver.html" class="footer-link">Become a Driver Partner</a></li>
+            <li><a href="community.html" class="footer-link">Community Standards</a></li>
+            <li><a href="index.html#help" class="footer-link">Help Center</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Pickmi Technologies. All rights reserved.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- CORE JAVASCRIPT -->
+  <script>
+    // Header Scroll Sticky Trigger
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('sticky');
+      } else {
+        header.classList.remove('sticky');
+      }
+    });
+
+    // Mobile Hamburger Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+
+  <!-- MYRA CHATBOT WIDGET -->
+  <!-- Floating Launcher Badge -->
+  <div class="myra-launcher" id="myraLauncher">
+    <div class="myra-bubble">
+      <span>Hi, <span class="purple-text">I am Eyes Ah</span></span>
+    </div>
+  </div>
+
+  <!-- Chat Box Window -->
+  <div class="myra-chatbox" id="myraChatbox">
+    <div class="myra-chatbox-header">
+      <span class="myra-header-title">Eyes Ah</span>
+      <button class="myra-close-btn" id="myraCloseBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <div class="myra-chatbox-body" id="myraChatBody">
+      <!-- Welcome Screen -->
+      <div id="myraWelcomeScreen">
+        <h2 class="myra-chat-title">Hi, There</h2>
+        <p class="myra-chat-subtitle">I'm Eyes Ah — your personal travel assistant. Let's plan your next trip together.</p>
+
+        <!-- Dynamic Query Cards Grid -->
+        <div class="myra-suggestions">
+          <!-- Suggestion 1: Large card -->
+          <div class="myra-card-large" onclick="sendSuggestion('Which are the best beaches to visit in India?')">
+            <div class="myra-card-large-bg" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop&q=60');">
+              <span class="myra-card-prompt">Which are the best beaches to visit in India?</span>
+            </div>
+          </div>
+
+          <!-- Suggestion 2: Small Card -->
+          <div class="myra-card-row" onclick="sendSuggestion('Which are the iconic palace hotels to experience in India?')">
+            <img src="https://images.unsplash.com/photo-1598977123418-45f04b615e0e?w=100&auto=format&fit=crop&q=60" alt="Palace Image">
+            <span class="myra-card-text">Which are the iconic palace hotels to experience in India?</span>
+          </div>
+
+          <!-- Suggestion 3: Small Card -->
+          <div class="myra-card-row" onclick="sendSuggestion('Can you suggest unique and offbeat travel destinations in India?')">
+            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=100&auto=format&fit=crop&q=60" alt="Adventure Image">
+            <span class="myra-card-text">Can you suggest unique and offbeat travel destinations in India?</span>
+          </div>
+
+          <!-- Suggestion 4: Small Card -->
+          <div class="myra-card-row" onclick="sendSuggestion('What are some perfect destinations for a memorable honeymoon?')">
+            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=100&auto=format&fit=crop&q=60" alt="Couple Image">
+            <span class="myra-card-text">What are some perfect destinations for a memorable couple trip?</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Messages Area -->
+      <div id="myraMessagesList" style="display: none; flex-direction: column; gap: 1rem; padding-bottom: 10px;">
+        <!-- Messages injected dynamically -->
+      </div>
+    </div>
+
+    <!-- Chat Box Footer Input -->
+    <div class="myra-chatbox-footer">
+      <form id="myraInputForm" style="display: flex; width: 100%; align-items: center; background-color: #f1f5f9; border-radius: 30px; padding: 6px 14px; gap: 10px;">
+        <input type="text" id="myraInputText" placeholder="Ask me anything" style="flex: 1; border: none; background: transparent; outline: none; font-size: 0.95rem; padding: 6px 0;" required>
+        <button type="submit" class="myra-send-btn" style="background-color: #0043DC; border: none; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; transition: 0.2s;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CORE JAVASCRIPT -->
+  <script>
+    // Header Scroll Sticky Trigger
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('sticky');
+      } else {
+        header.classList.remove('sticky');
+      }
+    });
+
+    // Mobile Hamburger Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Join community CTA smooth scroll
+    document.getElementById('joinCommunityBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector('#grow').scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+
+  <!-- Eyes Ah AI Assistant Script -->
+  <script src="chatbot.js"></script>
+  <script src="app.js?v=300"></script>
+
+  <!-- SPLIT-SCREEN LOGIN MODAL -->
+  <div class="login-modal-overlay" id="splitLoginModalOverlay">
+    <div class="login-modal" id="splitLoginModal">
+      <button class="login-modal-close" id="splitLoginModalClose">&times;</button>
+      <div class="login-modal-left" style="background-image: url('images/hero-bg.jpg');">
+      </div>
+      <div class="login-modal-right">
+        
+        <!-- STEP 1: MOBILE NUMBER ENTRY -->
+        <div id="authStepMobile" class="auth-step">
+          <h2 class="login-title" id="authModalTitle">Welcome to Pickmi</h2>
+          <p class="login-subtitle">Sign in or create an account to manage your rides and preferences.</p>
+          
+          <form class="login-form" id="formStepMobile">
+            <div class="phone-input-group">
+              <div class="phone-flag">
+                <img src="https://flagcdn.com/w20/in.png" alt="IN">
+              </div>
+              <input type="tel" id="authMobileInput" placeholder="Enter Mobile Number" class="login-input phone-input" pattern="[0-9]{10}" maxlength="10" required>
+            </div>
+            
+            <button type="submit" class="login-submit-btn" id="btnSendOtp">Continue</button>
+          </form>
+          
+          <p class="login-footer-text">By continuing you agree with the <a href="#">terms and conditions</a> of Pickmi</p>
+        </div>
+
+        <!-- STEP 2: OTP VERIFICATION -->
+        <div id="authStepOtp" class="auth-step" style="display: none;">
+          <h2 class="login-title">Verify OTP</h2>
+          <p class="login-subtitle" id="otpSubText">Enter the 4-digit OTP sent to your mobile number.</p>
+          
+          <form class="login-form" id="formStepOtp">
+            <input type="text" id="authOtpInput" placeholder="Enter 6-digit OTP" class="login-input" maxlength="6" pattern="[0-9]{4}" style="text-align: center; letter-spacing: 6px; font-size: 1.2rem; font-weight: 700;" required>
+            
+            <button type="submit" class="login-submit-btn" id="btnVerifyOtp">Verify OTP</button>
+          </form>
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; font-size: 0.85rem;">
+            <button type="button" id="btnBackToMobile" style="background: none; border: none; color: #0043DC; cursor: pointer; font-weight: 600;">← Change Number</button>
+            <button type="button" id="btnResendOtp" style="background: none; border: none; color: #64748b; cursor: pointer;">Resend OTP</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: NEW USER REGISTRATION -->
+        <div id="authStepRegister" class="auth-step" style="display: none;">
+          <h2 class="login-title">Create Account</h2>
+          <p class="login-subtitle">Looks like you're new here! Fill in your details to create an account.</p>
+          
+          <form class="login-form" id="formStepRegister">
+            <input type="text" id="authNameInput" placeholder="Full Name" class="login-input" required>
+            <input type="email" id="authEmailInput" placeholder="Email Address" class="login-input" required>
+            
+            <select id="authGenderSelect" class="login-input login-select" required>
+              <option value="" disabled selected>Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            
+            <button type="submit" class="login-submit-btn" id="btnCompleteRegister">Create Account &amp; Login</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase JS Client Integration -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+</body>
+</html>

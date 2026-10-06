@@ -1104,13 +1104,10 @@ function initAuthModule() {
   function getUser() {
     try {
       if (sessionStorage.getItem('pickmi_logged_out') === '1') return null;
-      const s = sessionStorage.getItem('pickmi_user');
+      const s = sessionStorage.getItem('pickmi_user') || localStorage.getItem('pickmi_user');
       if (s) { const u = JSON.parse(s); if (u && u.name) return u; }
     } catch(e) {}
-    // Default: always logged in as Karthik P
-    const u = { name: "Karthik P", email: "karthikpalani7613@gmail.com", gender: "Male", mobile: "+919345233351" };
-    try { sessionStorage.setItem('pickmi_user', JSON.stringify(u)); } catch(e) {}
-    return u;
+    return null;
   }
 
   function saveUser(u) {
@@ -1252,7 +1249,10 @@ function initAuthModule() {
   // ---- Login modal (shown only when NOT logged in) ----
   function showLoginModal() {
     const overlay = document.getElementById('splitLoginModalOverlay') || document.getElementById('loginModalOverlay');
-    if (!overlay) return;
+    if (!overlay) {
+      window.location.href = 'login.html';
+      return;
+    }
     const stepMobile = document.getElementById('authStepMobile');
     const stepOtp    = document.getElementById('authStepOtp');
     const stepReg    = document.getElementById('authStepRegister');
